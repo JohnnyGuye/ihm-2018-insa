@@ -1,4 +1,4 @@
-var month = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Novembre","Décembre"];
+var month = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
 var day = ["L", "M", "M", "J", "V", "S", "D"];
 
 function initCalendar(idCalendar)
