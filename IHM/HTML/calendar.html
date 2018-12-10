@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+ 	<head>
+ 		<meta charset="UTF-8" />
+ 		<link rel="stylesheet" type="text/css"  href="../CSS/calendarM.css" media="screen and (max-width: 480px)"/>
+ 		<link rel="stylesheet" type="text/css"  href="../CSS/commonM.css" media="screen and (max-width: 480px)"/>
+ 		<script type="text/javascript" src="../JS/calendar.js"></script>
+  		<title>INSAsso</title>
+ 	</head>
+ 	<body>
+
+ 		<div id="topBar"></div>
+ 		<div id="mainPart">
+	 		<div id="mainDate">
+	 			<span id="leftArrow" class="arrow">&larr;</span>
+	 			<span id="btnMonth" class="btnDate">Décembre</span>
+	 			<span id="btnYear" class="btnDate">2018</span>
+	 			<span id="rightArrow" class="arrow">&rarr;</span>
+	 		</div>
+	 		<table id="calendar">
+	 			<tbody>
+	 				<tr>
+	 					<th>L</th>
+	 					<th>M</th>
+	 					<th>M</th>
+	 					<th>J</th>
+	 					<th>V</th>
+	 					<th>S</th>
+	 					<th>D</th>
+	 				</tr>
+	 			</tbody>
+	 		</table>
+	 	</div>
+  		<div id="bottomBar"></div>
+
+  		<script>
+  			initCalendar("calendar");
+  		</script>
+  	
+ 	</body>
+</html>
