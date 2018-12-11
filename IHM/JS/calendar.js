@@ -1,58 +1,106 @@
 var monthToString = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
-var day = ["L", "M", "M", "J", "V", "S", "D"];
+var day = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
 
+var idCalendar = "calendar";
+var idMainDate = "mainDate";
 
-function initCalendar(idCalendar, idMainDate, month, year)
+var Calendar = function () 
 {
-	var todayDate = new Date();
+	this.m_todayDate = new Date();
+	this.m_events = new Map();
 
-	if (typeof month === "undefined")
+	this.m_divCalendar = null;
+	this.m_divMainDate = null;
+
+	this.m_monthPreview = this.m_todayDate.getMonth();
+	this.m_yearPreview = this.m_todayDate.getFullYear();
+
+	this.init = init;
+	this.display = display;
+	this.initBtnsDate = initBtnsDate;
+	this.translateMonth = translateMonth;
+	this.getImportanceEvents = getImportanceEvents;
+
+	this.addEvent = addEvent;
+
+};
+
+function init() 
+{
+	this.display();
+	this.initBtnsDate();
+}
+
+function addEvent(event)
+{
+	var dateTime = event.dateTime();
+	var date = dateTime.getDate();
+	var month = dateTime.getMonth();
+	var year = dateTime.getFullYear();
+
+	var string = ""+date+month+year;
+
+	var dayEvents = this.m_events.get(string);
+
+	if (dayEvents != undefined)
 	{
-		month = todayDate.getMonth();
+		dayEvents.push(event);
+	}
+	else
+	{
+		 this.m_events.set(string, [event]);
 	}
 
-	if (typeof year === "undefined")
-	{
-		year = todayDate.getFullYear();
-	}
+	console.log(string);
+}
+
+function display()
+{
+	var month =  this.m_monthPreview;
+	var year = this.m_yearPreview;
+
 
 	var calendar = document.getElementById(idCalendar).tBodies[0];
 	calendar.innerHTML = "";
 
+	var previousDate = new Date(year, month-1);
+	var date =  new Date(year, month);
+	var nextDate = new Date(year, month+1);
 
-	var date = new Date(year, month);
 	var day = date.getDay()-1;
+
 	var nbDaysCurrent = new Date(year, month+1, 0).getDate();
 	var nbDaysPrevious = new Date(year, month, 0).getDate();
+
 	var beginDay = new Date(year, month, 1).getDay()-1;
 	var endDay = new Date(year, month, nbDaysCurrent).getDay()-1;
+
 	var nbWeeks = 6;
 	var beginCalendarDate;
-	var currentMonth;
+	var currentMonthDate;
 
 
 	if (beginDay == 0)
 	{
 		beginCalendarDate = 1;
-		currentMonth = 0;
+		currentMonth = date.getMonth();
 	}
 	else
 	{
 		beginCalendarDate = nbDaysPrevious-beginDay + 1;
-		currentMonth = -1;
+		currentMonth = previousDate.getMonth();
 	}
 
 	var numDay = beginCalendarDate;
 
 
 	var displayToday = false;
-	if (todayDate.getMonth()==month &&
-		todayDate.getFullYear()==year)
+	if (this.m_todayDate.getMonth()==month &&
+		this.m_todayDate.getFullYear()==year)
 	{
 		displayToday = true;
 
 	}
-
 
 
 	for (var i = 0; i < nbWeeks; i++)
@@ -64,31 +112,45 @@ function initCalendar(idCalendar, idMainDate, month, year)
 			var circularDiv = document.createElement("span");
 			
 
-			if (currentMonth==-1 && numDay>nbDaysPrevious)
+			if (currentMonth==previousDate.getMonth() && numDay>nbDaysPrevious)
 			{
 				numDay = 1;
-				currentMonth ++;
+				currentMonth = date.getMonth();
 			}
-			else if (currentMonth==-1)
+			else if (currentMonth==previousDate.getMonth())
 			{
 				cell.className="dayPreviousMonth greyTextINSA";
 			}
-			else if (currentMonth==0 && numDay>nbDaysCurrent)
+			else if (currentMonth==date.getMonth() && numDay>nbDaysCurrent)
 			{
 				numDay = 1;
 				cell.className="dayNextMonth greyTextINSA";
-				currentMonth ++;
+				currentMonth = nextDate.getMonth();
 			}
-			else if (currentMonth==1)
+			else if (currentMonth==nextDate.getMonth())
 			{
 				cell.className="dayNextMonth greyTextINSA";
 			}
 			
-			if (currentMonth==0 && displayToday && todayDate.getDate() == numDay)
+			if (currentMonth==this.m_todayDate.getMonth() && displayToday && this.m_todayDate.getDate() == numDay)
 			{
 				displayToday = false;
 				circularDiv.id="todayDate";
 			}
+
+			
+
+			var importance = this.getImportanceEvents(numDay, currentMonth, date.getFullYear());
+
+			switch (importance)
+			{
+				case 0:
+				break;
+				case 1:
+				break;
+			}
+
+
 			
 			circularDiv.className="circleDay greyTextINSA";
 			circularDiv.textContent=numDay;
@@ -100,19 +162,12 @@ function initCalendar(idCalendar, idMainDate, month, year)
 
 }
 
-function initBtnsDate (idMainDate, idCalendar, month, year)
+function initBtnsDate ()
 {
-	var todayDate = new Date();
+	var calendar = this;
 
-	if (typeof month === "undefined")
-	{
-		month = todayDate.getMonth();
-	}
-
-	if (typeof year === "undefined")
-	{
-		year = todayDate.getFullYear();
-	}
+	var month =  this.m_monthPreview;
+	var year = this.m_yearPreview;
 
 	var mainDate = document.getElementById(idMainDate);
 	mainDate.innerHTML = "";
@@ -144,17 +199,19 @@ function initBtnsDate (idMainDate, idCalendar, month, year)
 
 	leftArrowSpan.addEventListener("click", function()
 	{
-		translateMonth(idMainDate, idCalendar, month, year,-1);
+		calendar.translateMonth(-1);
 	});
 	rightArrowSpan.addEventListener("click", function()
 	{
-		translateMonth(idMainDate, idCalendar, month, year,+1);
+		calendar.translateMonth(+1);
 	});
 
 }
 
-function translateMonth(idMainDate, idCalendar, month, year, nbMonth)
+function translateMonth(nbMonth)
 {
+	var month = this.m_monthPreview;
+	var year = this.m_yearPreview;
 
 	var sumMonth = month+nbMonth;
 
@@ -168,21 +225,36 @@ function translateMonth(idMainDate, idCalendar, month, year, nbMonth)
 	}
 	console.log(newMonth);
 	
+	this.m_monthPreview = newMonth;
+	this.m_yearPreview = newYear;
 
-	initCalendar(idCalendar, idMainDate, newMonth, newYear);
-	initBtnsDate(idMainDate, idCalendar, newMonth, newYear);
+	this.display();
+	this.initBtnsDate();
 	
 }
 
-
-function removeElementsByClass (className)
+function getImportanceEvents(day, month, year) 
 {
-    var elements = document.getElementsByClassName(className);
+	var string = ""+day+month+year;
+	var events = this.m_events.get(string);
 
-    while(elements.length > 0)
-    {
-        elements[0].parentNode.removeChild(elements[0]);
-    }
+	if (typeof events === "undefined")
+	{
+		return 0;
+	}
+
+	console.log(events.length)
+	var maxImportance = 0;
+	for (var i  = 0; i < events.length; i++)
+	{
+		var importance = events[i].importance();
+		console.log(importance);
+		if (importance > maxImportance)
+		{
+			maxImportance = importance;
+		}
+	}
+
+	return maxImportance;
 }
-
 

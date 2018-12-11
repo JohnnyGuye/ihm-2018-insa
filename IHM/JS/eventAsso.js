@@ -1,38 +1,72 @@
 
 
-var EventAsso = function(dateTime, name, place, importance) 
+var EventAsso = function(varDateTime, varName, varPlace, varImportance) 
 {
-	if (typeof importance === "undefined")
-	{  
-		this.importance = 0;
-	}
+	 
+	this.m_importance = 0;
+	this.m_place = null;
+    this.m_name = null;
+    this.m_dateTime = null;
+	
+    this.importance = importance;
+    this.name = name;
+    this.place = place;
+    this.dateTime = dateTime;
 
-	if (typeof place === "undefined")
-	{  
-		this.place = "non renseigné";
-	}
-
-	if (typeof name === "undefined")
-	{  
-		this.name = "non renseigné";
-	}
-
-	if (typeof dateTime === "undefined")
-	{  
-		this.dateTime = "non renseigné";
-	}
-
-	this.setImportance = setImportance;
-
-	this.setName = setName;
+    this.importance(varImportance);
+    this.name(varName);
+    this.place(varPlace);
+    this.dateTime(varDateTime);
 };
 
-function setImportance (importance)
+function importance (importance)
 {
-	this.importance = parseInt(importance);
+	if (typeof importance !== "undefined")
+	{  
+		this.m_importance = parseInt(importance);
+	}
+	
+	return this.m_importance;
+		
 }
 
-function setName (name)
+function name (name)
 {
-	this.name = name;
+	if (typeof name !== "undefined")
+	{  
+		this.m_name = name;
+	}
+	
+	return this.m_name;
+}
+
+function dateTime (dateTime)
+{
+	console.log(dateTime);
+	if (typeof dateTime === 'undefined')
+	{  
+		return this.m_dateTime;
+	}
+	else if (typeof dateTime.getMonth === 'function')
+	{
+		this.m_dateTime = dateTime;
+	}
+	else if (typeof dateTime !== 'undefined')
+	{  
+		this.m_dateTime = new Date(dateTime);
+	}
+
+	return this.m_dateTime;
+
+	
+}
+
+function place (place)
+{
+	if (typeof place !== "undefined")
+	{  
+		this.m_place = place;
+	}
+	
+	return this.m_place;
 }
