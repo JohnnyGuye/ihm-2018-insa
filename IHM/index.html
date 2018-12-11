@@ -4,14 +4,16 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width">
 		<meta name="viewport" content="initial-scale=1.0">
-		<link rel="stylesheet" type="text/css"  href="./CSS/indexM.css" media="screen and (max-width: 480px)"/>
-    <link rel="stylesheet" type="text/css"  href="./CSS/commonM.css" media="screen and (max-width: 480px)"/>
+		<link rel="stylesheet" type="text/css"  href="./CSS/indexM.css" />
+    <link rel="stylesheet" type="text/css"  href="./CSS/commonM.css" />
     <link href="https://fonts.googleapis.com/css?family=Gamja+Flower|Ubuntu" rel="stylesheet">
 		<title>INSAsso</title>
 
     <script src="./JS/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <script type="text/javascript" src="./JS/calendar.js"></script>
 
     <script id="searchbar">
       $(document).ready(function(){
@@ -41,15 +43,27 @@
       </div>
     </header>
 
-    <div class="content">
+    <div class="content" id="content">
+      <calendar></calendar>
       <a href="./HTML/calendar.html">Calendrier</a>
     </div>
-  		
+
     <footer class="z-index-1 primary-bg">
       <button class="icon-btn icon-home"></button>
       <button class="icon-btn icon-calendar"></button>
       <button class="icon-btn icon-list"></button>
       <button class="icon-btn icon-tool"></button>
     </footer>
+
+    <!-- Post page instance scripts -->
+    <script src="./JS/calendar-component.js"></script>
+    <script>
+      var app = new Vue(
+        {
+          el: '#content'
+        }
+      )
+      var cal = new Calendar( "calendar", "mainDate" )
+    </script>
  	</body>
 </html>
