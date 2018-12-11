@@ -3,6 +3,11 @@
 	margin: 0 auto;
 	position: relative;
 	text-align: center;
+
+	-webkit-user-select: none; /* Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+/Edge */
+	user-select: none; /* Standard */
 }
 
 
@@ -16,10 +21,20 @@
 	background: rgba(50,50,50,0.2);
 }
 
+#leftArrow 
+{
+	left: 20px;
+}
+
+#rightArrow 
+{
+	right: 20px;
+}
 .arrow
 {
 	cursor: pointer;
 	padding: 2px;
+	position: absolute;
 }
 .arrow:hover
 {
@@ -32,6 +47,10 @@
 	margin: 0 auto;
 	width: 90%;
 	text-align: center;
+	-webkit-user-select: none; /* Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+/Edge */
+	user-select: none; /* Standard */
 }
 
 #calendar th

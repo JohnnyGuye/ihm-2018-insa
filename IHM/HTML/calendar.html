@@ -6,6 +6,7 @@
 		<meta name="viewport" content="initial-scale=1.0">
  		<link rel="stylesheet" type="text/css"  href="../CSS/calendarM.css" media="screen and (max-width: 480px)"/>
  		<link rel="stylesheet" type="text/css"  href="../CSS/commonM.css" media="screen and (max-width: 480px)"/>
+ 		<script type="text/javascript" src="../JS/EventAsso.js"></script>
  		<script type="text/javascript" src="../JS/calendar.js"></script>
   		<title>INSAsso</title>
  	</head>
@@ -35,6 +36,12 @@
   		<div id="bottomBar"></div>
 
   		<script>
+  			
+
+  			var event1 = new EventAsso();
+  			event1.setName("nom");
+  			console.log(event1);
+
   			initBtnsDate("mainDate","calendar");
   			initCalendar("calendar","mainDate");
   		</script>
