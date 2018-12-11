@@ -1,31 +1,38 @@
-var month = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+var monthToString = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
 var day = ["L", "M", "M", "J", "V", "S", "D"];
 
-function initCalendar(idCalendar)
-{
-	var calendar = document.getElementById(idCalendar);
 
-	var date = new Date();
-	var month = date.getMonth();
-	var year = date.getFullYear();
-	var dateNum = date.getDate();
+function initCalendar(idCalendar, idMainDate, month, year)
+{
+	var todayDate = new Date();
+
+	if (typeof month === "undefined")
+	{
+		month = todayDate.getMonth();
+	}
+
+	if (typeof year === "undefined")
+	{
+		year = todayDate.getFullYear();
+	}
+
+	var calendar = document.getElementById(idCalendar).tBodies[0];
+	calendar.innerHTML = "";
+
+
+	var date = new Date(year, month);
 	var day = date.getDay()-1;
 	var nbDaysCurrent = new Date(year, month+1, 0).getDate();
 	var nbDaysPrevious = new Date(year, month, 0).getDate();
 	var beginDay = new Date(year, month, 1).getDay()-1;
 	var endDay = new Date(year, month, nbDaysCurrent).getDay()-1;
-
 	var nbWeeks = 6;
-
 	var beginCalendarDate;
-
 	var currentMonth;
 
-	console.log(nbDaysPrevious);
 
 	if (beginDay == 0)
 	{
-		nbWeeks--;
 		beginCalendarDate = 1;
 		currentMonth = 0;
 	}
@@ -37,8 +44,14 @@ function initCalendar(idCalendar)
 
 	var numDay = beginCalendarDate;
 
-	if (endDay == 6)
-		nbWeeks--;
+
+	var displayToday = false;
+	if (todayDate.getMonth()==month &&
+		todayDate.getFullYear()==year)
+	{
+		displayToday = true;
+
+	}
 
 
 
@@ -48,6 +61,9 @@ function initCalendar(idCalendar)
 		for (var j = 0; j < 7; j++)
 		{
 			var cell = row.insertCell();
+			var circularDiv = document.createElement("span");
+			
+
 			if (currentMonth==-1 && numDay>nbDaysPrevious)
 			{
 				numDay = 1;
@@ -55,22 +71,26 @@ function initCalendar(idCalendar)
 			}
 			else if (currentMonth==-1)
 			{
-				cell.className="dayPreviousMonth";
+				cell.className="dayPreviousMonth greyTextINSA";
 			}
 			else if (currentMonth==0 && numDay>nbDaysCurrent)
 			{
 				numDay = 1;
-				cell.className="dayNextMonth";
+				cell.className="dayNextMonth greyTextINSA";
 				currentMonth ++;
 			}
 			else if (currentMonth==1)
 			{
-				cell.className="dayNextMonth";
+				cell.className="dayNextMonth greyTextINSA";
 			}
 			
+			if (currentMonth==0 && displayToday && todayDate.getDate() == numDay)
+			{
+				displayToday = false;
+				circularDiv.id="todayDate";
+			}
 			
-			var circularDiv = document.createElement("span");
-			circularDiv.className="circleDay";
+			circularDiv.className="circleDay greyTextINSA";
 			circularDiv.textContent=numDay;
 			numDay++;
 			cell.append(circularDiv);
@@ -80,5 +100,89 @@ function initCalendar(idCalendar)
 
 }
 
+function initBtnsDate (idMainDate, idCalendar, month, year)
+{
+	var todayDate = new Date();
+
+	if (typeof month === "undefined")
+	{
+		month = todayDate.getMonth();
+	}
+
+	if (typeof year === "undefined")
+	{
+		year = todayDate.getFullYear();
+	}
+
+	var mainDate = document.getElementById(idMainDate);
+	mainDate.innerHTML = "";
+
+	var leftArrowSpan = document.createElement("span");
+	leftArrowSpan.id="leftArrow";
+	leftArrowSpan.className="arrow";
+	leftArrowSpan.innerHTML="&larr;";
+
+	var monthSpan = document.createElement("span");
+	monthSpan.id="btnMonth";
+	monthSpan.className="btnDate";
+	monthSpan.textContent=monthToString[month];
+
+	var yearSpan = document.createElement("span");
+	yearSpan.id="btnYear";
+	yearSpan.className="btnDate";
+	yearSpan.textContent=year;
+
+	var rightArrowSpan = document.createElement("span");
+	rightArrowSpan.id="rightArrow";
+	rightArrowSpan.className="arrow";
+	rightArrowSpan.innerHTML="&rarr;";
+
+	mainDate.append(leftArrowSpan);
+	mainDate.append(monthSpan);
+	mainDate.append(yearSpan);
+	mainDate.append(rightArrowSpan);
+
+	leftArrowSpan.addEventListener("click", function()
+	{
+		translateMonth(idMainDate, idCalendar, month, year,-1);
+	});
+	rightArrowSpan.addEventListener("click", function()
+	{
+		translateMonth(idMainDate, idCalendar, month, year,+1);
+	});
+
+}
+
+function translateMonth(idMainDate, idCalendar, month, year, nbMonth)
+{
+
+	var sumMonth = month+nbMonth;
+
+	var newYear = year + Math.trunc(sumMonth / 12);
+	
+	var newMonth = sumMonth%12;
+	if (newMonth == -1)
+	{
+		newYear--;
+		newMonth = 11;
+	}
+	console.log(newMonth);
+	
+
+	initCalendar(idCalendar, idMainDate, newMonth, newYear);
+	initBtnsDate(idMainDate, idCalendar, newMonth, newYear);
+	
+}
+
+
+function removeElementsByClass (className)
+{
+    var elements = document.getElementsByClassName(className);
+
+    while(elements.length > 0)
+    {
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+}
 
 

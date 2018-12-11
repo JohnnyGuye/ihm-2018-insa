@@ -6,7 +6,20 @@ html
 body
 {
 	background: rgb(230,230,230);
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
+
+.redTextINSA
+{
+	color: rgb(228,38,24);
+}
+
+.greyTextINSA
+{	
+	color: rgb(79,77,80);
+}
+
+
 
 #topBar
 {
