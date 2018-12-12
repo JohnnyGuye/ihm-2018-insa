@@ -7,16 +7,27 @@
 
 		<title>INSAsso</title>
 
-    <!-- External and CDNs -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Gamja+Flower|Ubuntu" rel="stylesheet">
-    <script src="./JS/vue.js"></script>
+    <!-- === External and CDNs === -->
 
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Font awesome (icons set) -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Gamja+Flower|Ubuntu" rel="stylesheet">
+
+    <!-- Vuejs -->
+    <script src="./JS/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+
+
+    <!-- Local stylesheets -->
     <link rel="stylesheet" type="text/css"  href="./CSS/indexM.css" />
     <link rel="stylesheet" type="text/css"  href="./CSS/commonM.css" />
     <link rel="stylesheet" type="text/css"  href="./CSS/calendarM.css" />
 
+    <!-- Local scripts -->
  		<script type="text/javascript" src="./JS/index.js"></script>
     <script type="text/javascript" src="./JS/EventAsso.js"></script>
  		<script type="text/javascript" src="./JS/Calendar.js"></script>
@@ -43,6 +54,8 @@
 
  	<body>
 
+  <div id="vue">
+
     <header class="z-index-1 primary-bg">
       <div class="searchbar">
         <input type="text" id="searchbar-input">
@@ -51,13 +64,11 @@
       </div>
     </header>
 
-    <div class="content" id="content">
+    <main class="content">
       <calendar></calendar>
-      <a href="./HTML/calendar.html">Calendrier</a>
+      <feed v-bind:events="events"></feed>
       <a href="./HTML/listAsso.html">Liste Assos</a>
-    </div>
-
-
+    </main>
 
     <footer class="z-index-1 primary-bg">
       <button class="icon-btn icon-home"></button>
@@ -66,15 +77,62 @@
       <button class="icon-btn icon-tool"></button>
     </footer>
 
+  </div>
+
     <!-- Post page instance scripts -->
+    <script src="./JS/main-component.js"></script>
     <script src="./JS/calendar-component.js"></script>
+    <script src="./JS/event-feed-component.js"></script>
+    <script src="./JS/feed-component.js"></script>
+
     <script>
+      var events = [];
+
+      var date = new Date();
+
+      date.setDate( date.getDate() + 1)
+      var event1 = new EventAsso();
+      event1.name = "Randonnée Annecy"
+      event1.place = "Annecy"
+      event1.importance = 2
+      event1.dateTime = date
+      event1.asso = "Club Montagne"
+      event1.image = "../assets/club-montagne-rando.jpg"
+
+      events.push(event1);
+
+      var event2 = new EventAsso();
+      event2.name = "Sortie Ski "
+      event2.place = "Bat C"
+      event2.importance = 2
+      event2.dateTime = date
+      event2.asso = "Ski club"
+      event2.image = "../assets/ski-club.jpeg"
+
+      events.push(event2);
+
+      var event3 = new EventAsso();
+      event3.name = "Marché de Noel"
+      event3.place = "MdE"
+      event3.importance = 2
+      event3.dateTime = date
+      event3.asso = "Anim'"
+      event3.image = "../assets/marche-noel.jpg"
+
+      events.push(event3);
+
+    </script>
+
+    <script>
+      Vue.use(Vuetify);
       var app = new Vue(
         {
-          el: '#content'
+            el: '#vue',
+            data: function () {
+                return  { events }
+            }
         }
       )
-
     </script>
 
     <script>
@@ -125,5 +183,7 @@
       calendar.init()
 
 
-    </script> 	</body>
+    </script>
+
+  </body>
 </html>

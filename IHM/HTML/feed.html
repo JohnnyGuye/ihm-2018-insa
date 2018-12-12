@@ -4,17 +4,19 @@
  		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width">
 		<meta name="viewport" content="initial-scale=1.0">
-           <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
  		<link rel="stylesheet" type="text/css"  href="../CSS/calendarM.css">
  		<link rel="stylesheet" type="text/css"  href="../CSS/commonM.css">
- 		<script type="text/javascript" src="../JS/EventAsso.js"></script>
-         <script src="../JS/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
-         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-  		<title>INSAsso</title>
-          <script id="searchbar">
+    <script type="text/javascript" src="../JS/EventAsso.js"></script>
+
+    <script src="../JS/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <title>INSAsso</title>
+
+    <script id="searchbar">
       $(document).ready(function(){
 
       $('#searchbar-icon').click(function(){
@@ -68,9 +70,10 @@
   			events.push(event3);
 
       </script>
+
  	</head>
  	<body>
-         <header class="z-index-1 primary-bg">
+    <header class="z-index-1 primary-bg">
       <div class="searchbar">
         <input type="text" id="searchbar-input">
         <i class="fa fa-search" id="searchbar-icon" aria-hidden="true"></i>
@@ -81,13 +84,7 @@
  		<div id="mainPart">
 
         <div class="content" id="content">
-	 	    <v-container fluid grid-list-lg>
-                 <v-layout row wrap>
-                     <v-flex xs12 v-for="evt in events" v-bind:key="evt.name">
-                        <feed-event v-bind:event=evt></feed-event>
-                     </v-flex>
-                 </v-layout>
-	 	    </v-container>
+	 	    <feed v-bind:events=events></feed>
         </div>
 	 	</div>
   		<div id="bottomBar"></div>
@@ -101,13 +98,15 @@
 
     <!-- Post page instance scripts -->
     <script src="../JS/event-feed-component.js"></script>
+    <script src="../JS/feed-component.js"></script>
+
     <script>
-        Vue.use(Vuetify);
+      Vue.use(Vuetify);
       var app = new Vue(
         {
             el: '#content',
             data: function () {
-                return  {events}
+                return  { events }
             }
         }
       )

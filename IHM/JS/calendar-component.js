@@ -4,9 +4,6 @@ Vue.component(
     template:
     `
     <div>
-    <div id="topBar"></div>
-    <hr />
-    <div id="mainPart">
       <div id="mainDate"></div>
       <hr />
       <table id="calendar">
@@ -24,8 +21,6 @@ Vue.component(
         <tbody>
         </tbody>
       </table>
-    </div>
-    <div id="bottomBar"></div>
     </div>
     `
   }
