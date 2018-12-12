@@ -31,42 +31,43 @@
 
     });
     </script>
-        <script>
+      <script>
   			var events = [];
 
   			var date = new Date();
 
-  			date.setDate(date.getDate()+1);
+  			date.setDate( date.getDate() + 1)
   			var event1 = new EventAsso();
-  			event1.name("Randonnée Annecy");
-  			event1.place("Annecy");
-  			event1.importance(2);
-  			event1.dateTime(date);
-  			event1.asso("Club Montagne");
-  			event1.image("../assets/club-montagne-rando.jpg");
+  			event1.name = "Randonnée Annecy"
+  			event1.place = "Annecy"
+  			event1.importance = 2
+  			event1.dateTime = date
+  			event1.asso = "Club Montagne"
+  			event1.image = "../assets/club-montagne-rando.jpg"
 
   			events.push(event1);
 
   			var event2 = new EventAsso();
-  			event2.name("Sortie Ski ");
-  			event2.place("Bat C");
-  			event2.importance(2);
-  			event2.dateTime(date);
-  			event2.asso("Ski club");
-  			event2.image("../assets/ski-club.jpeg");
+  			event2.name = "Sortie Ski "
+  			event2.place = "Bat C"
+  			event2.importance = 2
+  			event2.dateTime = date
+  			event2.asso = "Ski club"
+  			event2.image = "../assets/ski-club.jpeg"
 
   			events.push(event2);
+
   			var event3 = new EventAsso();
-  			event3.name("Marché de Noel");
-  			event3.place("MdE");
-  			event3.importance(2);
-  			event3.dateTime(date);
-  			event3.asso("Anim'");
-  			event3.image("../assets/marche-noel.jpg");
+  			event3.name = "Marché de Noel"
+  			event3.place = "MdE"
+  			event3.importance = 2
+  			event3.dateTime = date
+  			event3.asso = "Anim'"
+  			event3.image = "../assets/marche-noel.jpg"
 
   			events.push(event3);
 
-          </script>
+      </script>
  	</head>
  	<body>
          <header class="z-index-1 primary-bg">
@@ -82,8 +83,8 @@
         <div class="content" id="content">
 	 	    <v-container fluid grid-list-lg>
                  <v-layout row wrap>
-                     <v-flex xs12 v-for="item in events">
-                        <feed-event v-bind:item=item></feed-event>
+                     <v-flex xs12 v-for="evt in events" v-bind:key="evt.name">
+                        <feed-event v-bind:event=evt></feed-event>
                      </v-flex>
                  </v-layout>
 	 	    </v-container>
@@ -113,5 +114,3 @@
     </script>
  	</body>
 </html>
-
-
