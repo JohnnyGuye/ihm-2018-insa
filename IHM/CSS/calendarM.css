@@ -91,3 +91,87 @@
 	background: rgba(50,50,50,0.2);
 }
 
+.bubble
+{
+	position: absolute;
+	border-radius: 50%;
+	width: 4px;
+	height: 4px;
+	border: 1px solid grey;
+	text-align: center;
+	margin-left:8px;
+	margin-top:-1px;
+	background-color: grey;
+
+
+}
+
+.followBubbleEvent
+{
+	background-color: orange;
+	border-color: rgba(255, 165, 0, 0.7);
+
+}
+
+.signInBubbleEvent
+{
+	background-color: rgb(228,38,24);
+	border-color: rgba(228,38,24, 0.7);
+}
+
+.dateChooser
+{
+	position: relative;
+	height: 150px;
+	width: 60vw;
+	text-align: center;
+	overflow: scroll;
+	
+
+}
+
+.linearGardientTopToBottom
+{
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	left: 2px;
+	height: 100px;
+	background: linear-gradient(to bottom, rgb(230,230,230), transparent);
+	display: block;
+	z-index: 1;
+}
+
+.dateChoice 
+{
+	padding-top: 62.5px;
+	padding-bottom: 62.5px;
+	color: black;
+
+}
+
+.linearGardientBottomToTop
+{
+	position: absolute;
+	bottom: 2px;
+	right: 2px;
+	left: 2px;
+	height: 100px;
+	background: linear-gradient(to top, rgb(230,230,230), transparent);
+	display: block;
+	z-index: 1;
+}
+
+.targetChoice
+{
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 20px;
+	position: fixed;
+	z-index: 1;
+	width: 80%;
+	border: 1px dashed gray;
+	
+}
+

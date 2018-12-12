@@ -1,6 +1,4 @@
-
-
-var EventAsso = function(varDateTime, varName, varPlace, varImportance) 
+var EventAsso = function(dateTime, name, place, importance) 
 {
 	 
 	this.m_importance = 0;
@@ -8,18 +6,15 @@ var EventAsso = function(varDateTime, varName, varPlace, varImportance)
     this.m_name = null;
     this.m_dateTime = null;
 	
-    this.importance = importance;
-    this.name = name;
-    this.place = place;
-    this.dateTime = dateTime;
 
-    this.importance(varImportance);
-    this.name(varName);
-    this.place(varPlace);
-    this.dateTime(varDateTime);
+    this.importance(importance);
+    this.name(name);
+    this.place(place);
+    this.dateTime(dateTime);
+
 };
 
-function importance (importance)
+EventAsso.prototype.importance = function(importance)
 {
 	if (typeof importance !== "undefined")
 	{  
@@ -30,7 +25,7 @@ function importance (importance)
 		
 }
 
-function name (name)
+EventAsso.prototype.name = function (name)
 {
 	if (typeof name !== "undefined")
 	{  
@@ -40,9 +35,8 @@ function name (name)
 	return this.m_name;
 }
 
-function dateTime (dateTime)
+EventAsso.prototype.dateTime = function(dateTime)
 {
-	console.log(dateTime);
 	if (typeof dateTime === 'undefined')
 	{  
 		return this.m_dateTime;
@@ -61,7 +55,7 @@ function dateTime (dateTime)
 	
 }
 
-function place (place)
+EventAsso.prototype.place = function(place)
 {
 	if (typeof place !== "undefined")
 	{  

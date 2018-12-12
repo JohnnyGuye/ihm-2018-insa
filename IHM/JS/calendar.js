@@ -19,7 +19,8 @@ var Calendar = function ()
 	this.display = display;
 	this.initBtnsDate = initBtnsDate;
 	this.translateMonth = translateMonth;
-	this.getImportanceEvents = getImportanceEvents;
+	this.getImportanceEventsDay = getImportanceEventsDay;
+	this.chooseMonth=chooseMonth;
 
 	this.addEvent = addEvent;
 
@@ -33,25 +34,24 @@ function init()
 
 function addEvent(event)
 {
+
 	var dateTime = event.dateTime();
 	var date = dateTime.getDate();
 	var month = dateTime.getMonth();
 	var year = dateTime.getFullYear();
 
-	var string = ""+date+month+year;
+	var string = date+"-"+month+"-"+year;
+	
 
-	var dayEvents = this.m_events.get(string);
-
-	if (dayEvents != undefined)
+	if(!this.m_events.has(string)) 
 	{
-		dayEvents.push(event);
-	}
-	else
-	{
-		 this.m_events.set(string, [event]);
+		this.m_events.set(string, [])
 	}
 
-	console.log(string);
+	this.m_events.get(string).push(event)
+
+	console.log(this.m_events);
+
 }
 
 function display()
@@ -138,22 +138,40 @@ function display()
 				circularDiv.id="todayDate";
 			}
 
-			
 
-			var importance = this.getImportanceEvents(numDay, currentMonth, date.getFullYear());
 
-			switch (importance)
+			var importance = this.getImportanceEventsDay(numDay, currentMonth, date.getFullYear());
+
+			var textNode = document.createTextNode(numDay);
+			circularDiv.append(textNode);
+
+			if (importance >= 0)
 			{
-				case 0:
-				break;
-				case 1:
-				break;
+				console.log(importance);
+				console.log(numDay, currentMonth, date.getFullYear());
+
+				
+
+				var bubble = document.createElement("div");
+				switch (importance)
+				{
+					case 0:
+						bubble.className="bubble";
+					break;
+					case 1:
+						bubble.className="bubble followBubbleEvent";
+					break;
+					case 2:
+						bubble.className="bubble signInBubbleEvent";	
+					break;
+				}
+				circularDiv.append(bubble);
+				console.log(circularDiv);
 			}
 
 
 			
 			circularDiv.className="circleDay greyTextINSA";
-			circularDiv.textContent=numDay;
 			numDay++;
 			cell.append(circularDiv);
 		}
@@ -181,11 +199,20 @@ function initBtnsDate ()
 	monthSpan.id="btnMonth";
 	monthSpan.className="btnDate";
 	monthSpan.textContent=monthToString[month];
+	monthSpan.addEventListener("click", function()
+	{
+		calendar.chooseMonth();
+	});
+
 
 	var yearSpan = document.createElement("span");
 	yearSpan.id="btnYear";
 	yearSpan.className="btnDate";
 	yearSpan.textContent=year;
+	yearSpan.addEventListener("click", function()
+	{
+		calendar.chooseYear();
+	});
 
 	var rightArrowSpan = document.createElement("span");
 	rightArrowSpan.id="rightArrow";
@@ -223,7 +250,6 @@ function translateMonth(nbMonth)
 		newYear--;
 		newMonth = 11;
 	}
-	console.log(newMonth);
 	
 	this.m_monthPreview = newMonth;
 	this.m_yearPreview = newYear;
@@ -233,22 +259,25 @@ function translateMonth(nbMonth)
 	
 }
 
-function getImportanceEvents(day, month, year) 
+function getImportanceEventsDay(day, month, year) 
 {
-	var string = ""+day+month+year;
-	var events = this.m_events.get(string);
+	var string = day+"-"+month+"-"+year;
 
-	if (typeof events === "undefined")
+
+	if (!this.m_events.has(string))
 	{
-		return 0;
+		
+		return -1;
 	}
 
-	console.log(events.length)
-	var maxImportance = 0;
+	
+	var events = this.m_events.get(string);
+
+	
+	var maxImportance = -1;
 	for (var i  = 0; i < events.length; i++)
 	{
 		var importance = events[i].importance();
-		console.log(importance);
 		if (importance > maxImportance)
 		{
 			maxImportance = importance;
@@ -256,5 +285,54 @@ function getImportanceEvents(day, month, year)
 	}
 
 	return maxImportance;
+}
+
+function chooseMonth ()
+{
+	var darkScreen = document.createElement("div");
+	darkScreen.className="darkScreen";
+
+	var frame = document.createElement("div");
+	frame.className="frame";
+
+	var select = document.createElement("div");	
+	select.className="dateChooser";
+
+	var choice = document.createElement("div");	
+	choice.className="dateChoice";
+
+	var target = document.createElement("div");	
+	target.className="targetChoice";
+
+	var linearGradient1 = document.createElement("div");
+	linearGradient1.className = "linearGardientTopToBottom";
+	frame.append(linearGradient1);
+
+	for (var i = 0; i < monthToString.length; i++)
+	{
+		var option = document.createElement("div");
+		option.value = i;
+		option.textContent=monthToString[i];
+		if (i ==  this.m_monthPreview)
+		{
+			option.setAttribute("selected","selected");
+		}
+		else
+		{
+			option.removeAttribute("selected");
+		}
+		choice.append(option);
+	}
+	var linearGradient2 = document.createElement("div");
+	linearGradient2.className = "linearGardientBottomToTop";
+	frame.append(linearGradient2);
+	choice.append(target);
+	select.append(choice);
+	
+	frame.append(select);
+	
+
+	document.body.append(darkScreen);
+	document.body.append(frame);
 }
 
