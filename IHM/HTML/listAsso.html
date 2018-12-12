@@ -1,0 +1,219 @@
+<html>
+ 	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="initial-scale=1.0">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css"  href=".././CSS/indexM.css" />
+    <link rel="stylesheet" type="text/css"  href=".././CSS/commonM.css" />
+    <link href="https://fonts.googleapis.com/css?family=Gamja+Flower|Ubuntu" rel="stylesheet">
+		<title>INSAsso LISTE</title>
+
+    <script src=".././JS/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <script type="text/javascript" src=".././JS/calendar.js"></script>
+
+    <script id="searchbar">
+      $(document).ready(function(){
+
+      $('#searchbar-icon').click(function(){
+        $('#searchbar-input').animate({width: 'toggle'});
+        $("#searchbar-icon").toggle();
+        $("#searchbar-cross").toggle(500);
+      });
+
+      $('#searchbar-cross').click(function(){
+        $('#searchbar-input').animate({width: 'toggle'});
+        $("#searchbar-cross").toggle();
+        $("#searchbar-icon").toggle(500);
+      });
+
+    });
+    </script>
+ 	</head>
+ 	<body>
+
+    <header class="z-index-1 primary-bg">
+      <div class="searchbar">
+        <input type="text" id="searchbar-input">
+        <i class="fa fa-search" id="searchbar-icon" aria-hidden="true"></i>
+        <i class="fa fa-times" id="searchbar-cross" aria-hidden="true"></i>
+      </div>
+    </header>
+    <script>
+    function toggleButton(that) {
+      that.classList.toggle( "unfollow" )
+    }
+    </script>
+    <div class="content" id="content">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/26992352_10159838903490134_7383194001432840263_n.png?_nc_cat=104&_nc_ht=scontent-mrs1-1.xx&oh=e5b8ff5dc2bfd8e4f7d751aa4d3c3b5a&oe=5C9370DA" alt="">
+            </div></div>
+            <div class="col col-6">
+              24 heures de l'INSA
+            </div>
+            <div class="col col-4">
+              <button class="followable" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/1175526_10152165884855828_685759715_n.jpg?_nc_cat=106&_nc_ht=scontent-mrs1-1.xx&oh=129624204794134f5b8e844ac7a363d7&oe=5CA456EE" alt="">
+            </div></div>
+            <div class="col col-6">
+              Graines d'Images
+            </div>
+            <div class="col col-4">
+              <button class="followable" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="../assets/tti.png" alt="">
+            </div></div>
+            <div class="col col-6">
+              Troupe Théâtrale de l'INSA (TTI)
+            </div>
+            <div class="col col-4">
+              <button class="followable unfollow" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/21462838_1590649147622038_7877221207811406772_n.jpg?_nc_cat=107&_nc_ht=scontent-mrs1-1.xx&oh=8a8ab36c424030d74332d0dcdfe95cd5&oe=5C983B25" alt="">
+            </div></div>
+            <div class="col col-6">
+              Club Montagne
+            </div>
+            <div class="col col-4">
+              <button class="followable" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/47254932_2785572011668308_6751636255135498240_n.png?_nc_cat=108&_nc_ht=scontent-mrs1-1.xx&oh=f1f1c332c8b3e7901f8d39004075ed5f&oe=5C95FD6A" alt="">
+            </div></div>
+            <div class="col col-6">
+              INSA E-sport
+            </div>
+            <div class="col col-4">
+              <button class="followable" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/1620675_644619585597105_14998711_n.jpg?_nc_cat=105&_nc_ht=scontent-mrs1-1.xx&oh=dc797f6e31f99b9ad06eec78f56d7be9&oe=5C64A028" alt="">
+            </div></div>
+            <div class="col col-6">
+              L'Art-Scène
+            </div>
+            <div class="col col-4">
+              <button class="followable unfollow" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/18011129_1873988046222147_5313132961779569628_n.jpg?_nc_cat=103&_nc_ht=scontent-mrs1-1.xx&oh=93be6782a15cc58c6cc73ff970cc2186&oe=5C9C8637" alt="">
+            </div></div>
+            <div class="col col-6">
+              Club Astro
+            </div>
+            <div class="col col-4">
+              <button class="followable unfollow" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/40590796_1898931266797111_1048922582385950720_n.png?_nc_cat=100&_nc_ht=scontent-mrs1-1.xx&oh=e6387847e69cd7f85a8b637f36f3c166&oe=5CA03DD3" alt="">
+            </div></div>
+            <div class="col col-6">
+              Commission de Gestion de la Rotonde (CGR)
+            </div>
+            <div class="col col-4">
+              <button class="followable" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/12115486_187181411618529_5378306676893494678_n.png?_nc_cat=100&_nc_ht=scontent-mrs1-1.xx&oh=6bf1cc18d7a134d9018a44ac6e423f64&oe=5C99346B" alt="">
+            </div></div>
+            <div class="col col-6">
+              InSecurity
+            </div>
+            <div class="col col-4">
+              <button class="followable" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/12540648_1037514726270987_1471159823466271751_n.png?_nc_cat=107&_nc_ht=scontent-mrs1-1.xx&oh=917a9dff85d2308dfec4fc1ecbe9d238&oe=5CA8DF0B" alt="">
+            </div></div>
+            <div class="col col-6">
+              Alumni INSA Lyon
+            </div>
+            <div class="col col-4">
+              <button class="followable" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col col-2"><div class="profile-image">
+                <img src="https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/21768147_1390572340998442_6566228959497348664_n.png?_nc_cat=104&_nc_ht=scontent-mrs1-1.xx&oh=042859bd1b5fd1468f217cecd06d3a50&oe=5C923ABD" alt="">
+            </div></div>
+            <div class="col col-6">
+              BDE
+            </div>
+            <div class="col col-4">
+              <button class="followable unfollow" onclick="toggleButton(this)"></button>
+            </div>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+
+    <footer class="z-index-1 primary-bg">
+      <button class="icon-btn icon-home"></button>
+      <button class="icon-btn icon-calendar"></button>
+      <button class="icon-btn icon-list active"></button>
+      <button class="icon-btn icon-tool"></button>
+    </footer>
+
+    <!-- Post page instance scripts -->
+    <script src=".././JS/calendar-component.js"></script>
+    <script>
+      var app = new Vue(
+        {
+          el: '#content'
+        }
+      )
+      var cal = new Calendar( "calendar", "mainDate" )
+    </script>
+ 	</body>
+</html>
