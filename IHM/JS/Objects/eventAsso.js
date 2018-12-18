@@ -1,6 +1,6 @@
 let EventAsso = function( name, date, place, asso, imageURI, importance ) {
 
-	let _date = ( date instanceof Date ? date : new Date( date ) )
+	let _date = ( date instanceof Date ? date : new Date( date ) );
 
 	return {
 

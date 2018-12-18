@@ -15,47 +15,13 @@ var Calendar = function ()
 	this.m_monthPreview = this.m_todayDate.getMonth();
 	this.m_yearPreview = this.m_todayDate.getFullYear();
 
-	this.init = init;
-	this.display = display;
-	this.initBtnsDate = initBtnsDate;
-	this.translateMonth = translateMonth;
-	this.getImportanceEventsDay = getImportanceEventsDay;
-	this.chooseMonth=chooseMonth;
-
-	this.addEvent = addEvent;
 
 };
 
-function init()
-{
-	this.display();
-	this.initBtnsDate();
-}
 
-function addEvent(event)
+Calendar.prototype.display = function() 
 {
 
-	var dateTime = event.dateTime();
-	var date = dateTime.getDate();
-	var month = dateTime.getMonth();
-	var year = dateTime.getFullYear();
-
-	var string = date+"-"+month+"-"+year;
-
-
-	if(!this.m_events.has(string))
-	{
-		this.m_events.set(string, [])
-	}
-
-	this.m_events.get(string).push(event)
-
-	console.log(this.m_events);
-
-}
-
-function display()
-{
 	var month =  this.m_monthPreview;
 	var year = this.m_yearPreview;
 
@@ -180,7 +146,7 @@ function display()
 
 }
 
-function initBtnsDate ()
+Calendar.prototype.initBtnsDate = function() 
 {
 	var calendar = this;
 
@@ -235,7 +201,8 @@ function initBtnsDate ()
 
 }
 
-function translateMonth(nbMonth)
+
+Calendar.prototype.translateMonth = function(nbMonth) 
 {
 	var month = this.m_monthPreview;
 	var year = this.m_yearPreview;
@@ -259,35 +226,7 @@ function translateMonth(nbMonth)
 
 }
 
-function getImportanceEventsDay(day, month, year)
-{
-	var string = day+"-"+month+"-"+year;
-
-
-	if (!this.m_events.has(string))
-	{
-
-		return -1;
-	}
-
-
-	var events = this.m_events.get(string);
-
-
-	var maxImportance = -1;
-	for (var i  = 0; i < events.length; i++)
-	{
-		var importance = events[i].importance();
-		if (importance > maxImportance)
-		{
-			maxImportance = importance;
-		}
-	}
-
-	return maxImportance;
-}
-
-function chooseMonth ()
+Calendar.prototype.chooseMonth = function() 
 {
 	var darkScreen = document.createElement("div");
 	darkScreen.className="darkScreen";
