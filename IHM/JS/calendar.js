@@ -34,8 +34,7 @@ function init()
 
 function addEvent(event)
 {
-
-	var dateTime = event.dateTime();
+	var dateTime = event.date;
 	var date = dateTime.getDate();
 	var month = dateTime.getMonth();
 	var year = dateTime.getFullYear();
@@ -277,7 +276,7 @@ function getImportanceEventsDay(day, month, year)
 	var maxImportance = -1;
 	for (var i  = 0; i < events.length; i++)
 	{
-		var importance = events[i].importance();
+		var importance = events[i].importance;
 		if (importance > maxImportance)
 		{
 			maxImportance = importance;

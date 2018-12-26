@@ -31,6 +31,8 @@
  		<script type="text/javascript" src="./JS/index.js"></script>
     <script type="text/javascript" src="./JS/EventAsso.js"></script>
  		<script type="text/javascript" src="./JS/Calendar.js"></script>
+    <script type="text/javascript" src="./JS/services/injector.js"></script>
+    <script type="text/javascript" src="./JS/services/event.service.js"></script>
 
     <script id="searchbar">
       $(document).ready(function(){
@@ -66,9 +68,9 @@
 
     <main class="content">
       <asso-description></asso-description>
-      <!-- <calendar></calendar>
+      <calendar></calendar>
       <feed v-bind:events="events"></feed>
-      <a href="./HTML/listAsso.html">Liste Assos</a> -->
+      <a href="./HTML/listAsso.html">Liste Assos</a>
     </main>
 
     <footer class="z-index-1 primary-bg">
@@ -88,40 +90,9 @@
     <script src="./JS/description-component.js"></script>
 
     <script>
-      var events = [];
 
-      var date = new Date();
-
-      date.setDate( date.getDate() + 1)
-      var event1 = new EventAsso();
-      event1.name = "Randonnée Annecy"
-      event1.place = "Annecy"
-      event1.importance = 2
-      event1.dateTime = date
-      event1.asso = "Club Montagne"
-      event1.image = "../assets/club-montagne-rando.jpg"
-
-      events.push(event1);
-
-      var event2 = new EventAsso();
-      event2.name = "Sortie Ski "
-      event2.place = "Bat C"
-      event2.importance = 2
-      event2.dateTime = date
-      event2.asso = "Ski club"
-      event2.image = "../assets/ski-club.jpeg"
-
-      events.push(event2);
-
-      var event3 = new EventAsso();
-      event3.name = "Marché de Noel"
-      event3.place = "MdE"
-      event3.importance = 2
-      event3.dateTime = date
-      event3.asso = "Anim'"
-      event3.image = "../assets/marche-noel.jpg"
-
-      events.push(event3);
+      [ evtServ ] = Injector.resolve( [ "EventService" ] )
+      evtServ.createTestEvents()
 
     </script>
 
@@ -131,7 +102,7 @@
         {
             el: '#vue',
             data: function () {
-                return  { events }
+                return  { events: evtServ.events }
             }
         }
       )
@@ -140,47 +111,7 @@
     <script>
 
       var calendar = new Calendar();
-
-
-      var date = new Date();
-      date.setDate( date.getDate() + 1 )
-
-      var event1 = new EventAsso()
-      event1.name = "événement1"
-      event1.place = "PC"
-      event1.importance = 2
-      event1.dateTime = date
-      calendar.addEvent = event1
-
-      var event4 = new EventAsso()
-      event4.name = "événement3"
-      event4.place = "PC"
-      event4.importance = 1
-      event4.dateTime = date
-      calendar.addEvent = event4
-
-      date.setDate( date.getDate() + 2 )
-      var event2 = new EventAsso()
-      event2.name = "événement2"
-      event2.place = "PC"
-      event2.importance = 1
-      event2.dateTime = date
-      calendar.addEvent = event2
-
-      date.setDate( date.getDate() + 1 )
-      var event3 = new EventAsso()
-      event3.name = "événement3"
-      event3.place = "PC"
-      event3.importance = 0
-      event3.dateTime = date
-      calendar.addEvent = event3
-
-      var event5 = new EventAsso()
-      event5.name = "événement2"
-      event5.place = "PC"
-      event5.importance = 1
-      event5.dateTime = date
-      calendar.addEvent = event5
+      evtServ.events.forEach( (value) => { calendar.addEvent( value) } )
 
       calendar.init()
 
