@@ -1,4 +1,5 @@
-Vue.component('base-layout', {
+Vue.component(
+  'base-layout', {
     props: [],
     template:
     `

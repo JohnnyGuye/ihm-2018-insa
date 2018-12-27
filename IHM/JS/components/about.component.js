@@ -1,5 +1,5 @@
 Vue.component(
-  "asso-description",
+  "about",
   {
     template:
     `

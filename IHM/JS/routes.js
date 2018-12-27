@@ -3,5 +3,5 @@ const routes = {
   'home' : 'asso-description',
   'feed' : 'feed',
   'calendar' : 'calendar',
-  'about' : 'asso-description'
+  'about' : 'about'
 }
