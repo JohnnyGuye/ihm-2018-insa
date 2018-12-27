@@ -2,11 +2,26 @@
   let NavigationService = function() {
 
     let pageStack = [ '' ]
+    let router = null
 
     return {
       routes: {},
 
       get stack() { return pageStack.slice() },
+
+      get currentRoute() {
+        return pageStack[ pageStack.length - 1 ]
+      },
+
+      registerRouter( _router ) {
+        router = _router
+        console.log( router )
+      },
+
+      notifyRouter() {
+        if(!router) return
+        router.currentRoute = this.currentRoute
+      },
 
       setRoot( target ) {
         target = target ? target : window.location.hash.substring(1)
@@ -17,10 +32,7 @@
       navigate( target ) {
         pageStack.push( target )
         window.location.hash = target
-      },
-
-      get currentRoute() {
-        return pageStack[ pageStack.length - 1 ]
+        this.notifyRouter()
       },
 
       pop( ) {
@@ -29,7 +41,8 @@
           return
         }
         pageStack.pop()
-        window.location.hash = pageStack[ pageStack.length -1 ]
+        window.location.hash = this.currentRoute
+        this.notifyRouter
       }
     }
   }

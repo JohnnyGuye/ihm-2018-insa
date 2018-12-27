@@ -108,10 +108,12 @@
       nav.routes = routes
       nav.setRoot( )
 
-      console.log( nav )
       evtServ.createTestEvents()
 
+      // Add some tooling for beautyful renders
       Vue.use(Vuetify);
+
+      // Setup the vue app
       var app = new Vue(
         {
             el: '#vue',
@@ -124,12 +126,16 @@
         }
       )
 
+      // Setup the router part
       let router = new Vue(
         {
           el: "#router",
+          data: {
+            currentRoute: nav.currentRoute
+          },
           computed: {
              ViewComponent () {
-               return nav.routes[nav.currentRoute]
+               return nav.routes[this.currentRoute]
              }
            },
            render(h) {
@@ -137,10 +143,13 @@
            }
         }
       )
+      nav.registerRouter( router )
+
     </script>
 
     <script>
 
+      // this should be fixed and placed in the calendar, you cannot expect the page to be openned by "calendar"
       var calendar = new Calendar();
       evtServ.events.forEach( (value) => { calendar.addEvent( value) } )
 
