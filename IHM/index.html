@@ -31,8 +31,11 @@
  		<script type="text/javascript" src="./JS/index.js"></script>
     <script type="text/javascript" src="./JS/EventAsso.js"></script>
  		<script type="text/javascript" src="./JS/Calendar.js"></script>
+
+    <!--  Injectable -->
     <script type="text/javascript" src="./JS/services/injector.js"></script>
     <script type="text/javascript" src="./JS/services/event.service.js"></script>
+    <script type="text/javascript" src="./JS/services/navigation.service.js"></script>
 
     <script id="searchbar">
       $(document).ready(function(){
@@ -58,27 +61,33 @@
 
   <div id="vue">
 
-    <header class="z-index-1 primary-bg">
-      <div class="searchbar">
+    <base-layout>
+
+      <div slot="header" class="searchbar">
         <input type="text" id="searchbar-input">
         <i class="fa fa-search" id="searchbar-icon" aria-hidden="true"></i>
         <i class="fa fa-times" id="searchbar-cross" aria-hidden="true"></i>
       </div>
-    </header>
 
-    <main class="content">
+      <template slot="footer">
+        <button class="icon-btn icon-home" onclick="nav.navigate('home')"></button>
+        <button class="icon-btn icon-calendar" onclick="nav.navigate('calendar')"></button>
+        <button class="icon-btn icon-list" onclick="nav.navigate('feed')"></button>
+        <button class="icon-btn icon-tool" onclick="nav.navigate('options')"></button>
+      </template>
+
+      <div id="router"></div>
+
+    </base-layout>
+
+
+    <!-- <main class="content">
       <asso-description></asso-description>
       <calendar></calendar>
       <feed v-bind:events="events"></feed>
       <a href="./HTML/listAsso.html">Liste Assos</a>
     </main>
-
-    <footer class="z-index-1 primary-bg">
-      <button class="icon-btn icon-home"></button>
-      <button class="icon-btn icon-calendar"></button>
-      <button class="icon-btn icon-list"></button>
-      <button class="icon-btn icon-tool"></button>
-    </footer>
+    -->
 
   </div>
 
@@ -89,21 +98,43 @@
     <script src="./JS/feed-component.js"></script>
     <script src="./JS/description-component.js"></script>
 
+    <!-- Routes -->
+    <script type="text/javascript" src="./JS/routes.js"></script>
+
     <script>
 
-      [ evtServ ] = Injector.resolve( [ "EventService" ] )
+      [ evtServ, nav ] = Injector.resolve( [ "EventService", "Navigation" ] )
+
+      nav.routes = routes
+      nav.setRoot( )
+
+      console.log( nav )
       evtServ.createTestEvents()
 
-    </script>
-
-    <script>
       Vue.use(Vuetify);
       var app = new Vue(
         {
             el: '#vue',
             data: function () {
-                return  { events: evtServ.events }
+                return  {
+                  events: evtServ.events,
+                  nav
+                }
             }
+        }
+      )
+
+      let router = new Vue(
+        {
+          el: "#router",
+          computed: {
+             ViewComponent () {
+               return nav.routes[nav.currentRoute]
+             }
+           },
+           render(h) {
+             return h(this.ViewComponent)
+           }
         }
       )
     </script>

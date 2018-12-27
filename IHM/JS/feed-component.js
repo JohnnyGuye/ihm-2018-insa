@@ -1,5 +1,7 @@
 Vue.component('feed', {
-    props: ['events'],
+    data() {
+      return { events: Injector.resolve( "EventService" ).events }
+    },
     template:
     `
     <v-container fluid grid-list-lg>

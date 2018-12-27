@@ -5,9 +5,12 @@ let Injector = function() {
 
     register: function(key, value) {
       if( dependencies[key] ) {
-        console.warn( "There is already a depencie registered after the name", key )
+        console.warn( "There is already a depency registered after the name", key )
+        return
       }
-      dependencies[key] = value()
+      console.log( "Register injectable", key )
+      let ob = value()
+      dependencies[key] = ob ? ob : value
     },
 
     list: function() {
@@ -39,22 +42,6 @@ let Injector = function() {
       }
 
     }
-    // },
-    //
-    // resolve: function(deps, func, scope) {
-    //   let args = [];
-    //
-    //   for(let i = 0; i < deps.length, d = deps[i]; i++) {
-    //       if( dependencies[d] ) {
-    //           args.push( dependencies[d] );
-    //       } else {
-    //           throw new Error('Can\'t resolve ' + d);
-    //       }
-    //   }
-    //   return function() {
-    //       func.apply(scope || {}, args.concat(Array.prototype.slice.call(arguments, 0)));
-    //   }
-    // }
 
   }
 }();
