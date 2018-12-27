@@ -37,24 +37,6 @@
     <script type="text/javascript" src="./JS/services/event.service.js"></script>
     <script type="text/javascript" src="./JS/services/navigation.service.js"></script>
 
-    <script id="searchbar">
-      $(document).ready(function(){
-
-      $('#searchbar-icon').click(function(){
-        $('#searchbar-input').animate({width: 'toggle'});
-        $("#searchbar-icon").toggle();
-        $("#searchbar-cross").toggle(500);
-      });
-
-      $('#searchbar-cross').click(function(){
-        $('#searchbar-input').animate({width: 'toggle'});
-        $("#searchbar-cross").toggle();
-        $("#searchbar-icon").toggle(500);
-      });
-
-    });
-    </script>
-
  	</head>
 
  	<body>
@@ -63,10 +45,8 @@
 
     <base-layout>
 
-      <div slot="header" class="searchbar">
-        <input type="text" id="searchbar-input">
-        <i class="fa fa-search" id="searchbar-icon" aria-hidden="true"></i>
-        <i class="fa fa-times" id="searchbar-cross" aria-hidden="true"></i>
+      <div slot="header">
+        <searchbar></searchbar>
       </div>
 
       <template slot="footer">
@@ -93,6 +73,7 @@
 
     <!-- Post page instance scripts -->
     <script src="./JS/components/base-layout.component.js"></script>
+    <script src="./JS/components/searchbar.component.js"></script>
     <script src="./JS/components/calendar.component.js"></script>
     <script src="./JS/components/event-feed.component.js"></script>
     <script src="./JS/components/feed.component.js"></script>
@@ -119,8 +100,7 @@
             el: '#vue',
             data: function () {
                 return  {
-                  events: evtServ.events,
-                  nav
+                  nav                     // Enables the possibility to navigate
                 }
             }
         }
@@ -144,17 +124,6 @@
         }
       )
       nav.registerRouter( router )
-
-    </script>
-
-    <script>
-
-      // this should be fixed and placed in the calendar, you cannot expect the page to be openned by "calendar"
-      var calendar = new Calendar();
-      evtServ.events.forEach( (value) => { calendar.addEvent( value) } )
-
-      calendar.init()
-
 
     </script>
 

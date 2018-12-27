@@ -1,6 +1,19 @@
 Vue.component(
   'calendar',
   {
+    methods: {
+      initCalendar() {
+        var calendar = new Calendar();
+        Injector.resolve( "EventService" ).events.forEach( (value) => { calendar.addEvent( value) } )
+
+        calendar.init()
+        console.log("created")
+        return calendar
+      }
+    },
+    mounted() {
+      this.initCalendar()
+    },
     template:
     `
     <div>
