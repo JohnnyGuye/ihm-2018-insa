@@ -1,7 +1,8 @@
 const routes = {
-  '' : 'home',
+  '' : 'connexion',
+  'connexion': "connexion",
   'home' : 'about',
   'feed' : 'feed',
   'calendar' : 'calendar',
-  'options' : 'assos-list'
+  'assos' : 'assos-list'
 }

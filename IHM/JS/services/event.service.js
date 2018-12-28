@@ -30,12 +30,12 @@
         event.name = "Winter tournament"
         event.place = "Reboot, Lyon"
         event.importance = 3
-        event.date = new Date("15-12-2018")
+        event.date = new Date("12-15-2018")
         event.asso = "INSA E-sport"
         event.imageURI = "https://scontent-mrs1-1.xx.fbcdn.net/v/t1.0-9/47507613_2785631848328991_7429561357789298688_o.jpg?_nc_cat=104&_nc_ht=scontent-mrs1-1.xx&oh=c6038247d2f0b31d4c588ebe2f5f8eb4&oe=5C8B9828"
-
+        console.log( event )
         this.addEvent( event )
-        
+
         event = new EventAsso()
 
         event.name = "Randonnée Annecy"

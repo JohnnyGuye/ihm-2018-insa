@@ -4,7 +4,7 @@
 	position: relative;
 	text-align: center;
 
-	-webkit-user-select: none; /* Safari */        
+	-webkit-user-select: none; /* Safari */
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* IE10+/Edge */
 	user-select: none; /* Standard */
@@ -21,12 +21,12 @@
 	background: rgba(50,50,50,0.2);
 }
 
-#leftArrow 
+#leftArrow
 {
 	left: 20px;
 }
 
-#rightArrow 
+#rightArrow
 {
 	right: 20px;
 }
@@ -41,13 +41,20 @@
 	background: rgba(50,50,50,0.2);
 }
 
+#calendar tbody tr {
+	height: 10vh;
+}
+#calendar tbody tr td {
+		text-align: center;
+}
+
 #calendar
 {
 	position: relative;
 	margin: 0 auto;
 	width: 90%;
 	text-align: center;
-	-webkit-user-select: none; /* Safari */        
+	-webkit-user-select: none; /* Safari */
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* IE10+/Edge */
 	user-select: none; /* Standard */
@@ -58,7 +65,7 @@
 	padding: 2px;
 }
 
-#calendar .dayPreviousMonth, #calendar .dayNextMonth 
+#calendar .dayPreviousMonth, #calendar .dayNextMonth
 {
 	opacity: 0.5;
 	text-align: center;
@@ -72,7 +79,6 @@
 
 .circleDay
 {
-	display: inherit;
 	margin: 0 auto;
 	width: 20px;
 	height: 20px;
@@ -126,7 +132,7 @@
 	width: 60vw;
 	text-align: center;
 	overflow: scroll;
-	
+
 
 }
 
@@ -142,7 +148,7 @@
 	z-index: 1;
 }
 
-.dateChoice 
+.dateChoice
 {
 	padding-top: 62.5px;
 	padding-bottom: 62.5px;
@@ -172,6 +178,5 @@
 	z-index: 1;
 	width: 80%;
 	border: 1px dashed gray;
-	
-}
 
+}

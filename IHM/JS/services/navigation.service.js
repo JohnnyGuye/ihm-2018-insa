@@ -3,11 +3,14 @@
 
     let pageStack = [ '' ]
     let router = null
+    let latestParams = null
 
     return {
       routes: {},
 
-      get stack() { return pageStack.slice() },
+      get stack() {   return pageStack.slice()  },
+
+      get params() {  return latestParams       },
 
       get currentRoute() {
         return pageStack[ pageStack.length - 1 ]
@@ -15,7 +18,6 @@
 
       registerRouter( _router ) {
         router = _router
-        console.log( router )
       },
 
       notifyRouter() {
@@ -29,10 +31,12 @@
         this.navigate( target )
       },
 
-      navigate( target ) {
+      navigate( target, params = null ) {
         pageStack.push( target )
+        latestParams = params
         window.location.hash = target
         this.notifyRouter()
+        console.log( this )
       },
 
       pop( ) {

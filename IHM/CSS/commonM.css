@@ -83,8 +83,9 @@ footer {
 	filter: grayscale(0);
 }
 .icon-home {
-	background: url("../assets/home.png");
+	background: url("../assets/feed.png");
 	background-size: contain;
+  background-repeat: no-repeat;
 	background-position: center;
 }
 .icon-calendar {
