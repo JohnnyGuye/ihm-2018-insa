@@ -16,6 +16,17 @@
         }
       },
 
+      getMatchingAssoEvents: function( assoName ) {
+        assoName = assoName.toLowerCase()
+        let res = []
+        for(let event of events) {
+          console.log(event)
+          if( event.asso.toLowerCase() != assoName )  continue;
+          res.push( event )
+        }
+        return res
+      },
+
       createTestEvents: function() {
         let date = new Date();
 

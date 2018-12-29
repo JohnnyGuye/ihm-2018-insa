@@ -2,11 +2,11 @@ function EventAsso( name, date, place, asso, imageURI, importance ) {
 
 	let _date = ( date instanceof Date ? date : new Date( date ) )
 
-	this.importance = importance,
-	this.name = name,
-	this.place = place,
-	this.asso = asso,
-	this.imageURI = imageURI,
+	this.importance = importance || 1
+	this.name = name || ""
+	this.place = place || ""
+	this.asso = asso || ""
+	this.imageURI = imageURI || ""
 
 	Object.defineProperty(
 		this,

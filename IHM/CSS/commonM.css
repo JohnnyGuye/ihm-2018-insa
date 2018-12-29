@@ -16,7 +16,7 @@ body {
 
 body.handwritten,
 .handwritten * {
-  font-family: "Gamja Flower", sans-serif;
+  font-family: "Indie Flower", sans-serif;
 }
 
 .z-index-1 {
@@ -104,6 +104,38 @@ footer {
 	background-position: center;
 }
 
+.segments {
+  display: flex;
+  align-content: stretch;
+}
+button.segment {
+  position: relative;
+  padding: 5px;
+  flex-grow: 1;
+  background-color: red;
+  color: white;
+}
+button.segment::after {
+  position: absolute;
+  left: 50%;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  border-bottom: solid 2px white;
+  transition: all 0.5s;
+}
+button.segment:active {
+  outline: none;
+}
+button.segment.active::after {
+  content: '.';
+  left: 20%;
+  width: 60%;
+  color: transparent;
+  border-bottom: solid 2px white;
+}
+
+button.asso-insight,
 button.followable {
   outline: none;
   height: 40px;
@@ -118,12 +150,16 @@ button.followable {
   font-size: 12px;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.25s ease, letter-spacing 0s;
   margin: 0rem;
 }
 
+button.asso-insight:active {
+  background: #ddd;
+}
+
 button.followable:active {
-  letter-spacing: 2px;
+  letter-spacing: 0px;
 }
 button.followable:after {
   content: "Suivre";
@@ -141,7 +177,7 @@ button.followable.unfollow{
   color: white;
   background: #fa002e;
 
-  letter-spacing: 1px;
+  letter-spacing: 0px;
   text-shadow: 0;
   font-size: 12px;
   font-weight: bold;
@@ -257,4 +293,9 @@ input {
 #mainPart
 {
 	position: relative;
+}
+
+/* Vuetify fix */
+.headline {
+  font-family: inherit !important;
 }

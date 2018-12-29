@@ -1,6 +1,3 @@
-var monthToString = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
-var day = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
-
 var idCalendar = "calendar";
 var idMainDate = "mainDate";
 
@@ -26,6 +23,31 @@ var Calendar = function ()
 
 };
 
+Calendar.MONTHS = Object.freeze([
+	"Janvier",
+	"Février",
+	"Mars",
+	"Avril",
+	"Mai",
+	"Juin",
+	"Juillet",
+	"Août",
+	"Septembre",
+	"Octobre",
+	"Novembre",
+	"Décembre"
+])
+
+Calendar.DAYS = Object.freeze([
+	"Lundi",
+	"Mardi",
+	"Mercredi",
+	"Jeudi",
+	"Vendredi",
+	"Samedi",
+	"Dimanche"
+])
+
 function init()
 {
 	this.display();
@@ -48,8 +70,6 @@ function addEvent(event)
 	}
 
 	this.m_events.get(string).push(event)
-
-	console.log(this.m_events);
 
 }
 
@@ -146,11 +166,6 @@ function display()
 
 			if (importance >= 0)
 			{
-				console.log(importance);
-				console.log(numDay, currentMonth, date.getFullYear());
-
-
-
 				var bubble = document.createElement("div");
 				switch (importance)
 				{
@@ -165,10 +180,7 @@ function display()
 					break;
 				}
 				circularDiv.append(bubble);
-				console.log(circularDiv);
 			}
-
-
 
 			circularDiv.className="circleDay greyTextINSA";
 			numDay++;
@@ -197,7 +209,7 @@ function initBtnsDate ()
 	var monthSpan = document.createElement("span");
 	monthSpan.id="btnMonth";
 	monthSpan.className="btnDate";
-	monthSpan.textContent=monthToString[month];
+	monthSpan.textContent= Calendar.MONTHS[month];
 	monthSpan.addEventListener("click", function()
 	{
 		calendar.chooseMonth();
@@ -307,21 +319,26 @@ function chooseMonth ()
 	linearGradient1.className = "linearGardientTopToBottom";
 	frame.append(linearGradient1);
 
-	for (var i = 0; i < monthToString.length; i++)
-	{
-		var option = document.createElement("div");
-		option.value = i;
-		option.textContent=monthToString[i];
-		if (i ==  this.m_monthPreview)
-		{
-			option.setAttribute("selected","selected");
+	Calendar.MONTHS.forEach(
+		(month, idx) => {
+
+			var option = document.createElement("div");
+			option.value = idx;
+			option.textContent = month;
+
+			if (idx ==  this.m_monthPreview)
+			{
+				option.setAttribute("selected","selected");
+			}
+			else
+			{
+				option.removeAttribute("selected");
+			}
+			choice.append(option);
 		}
-		else
-		{
-			option.removeAttribute("selected");
-		}
-		choice.append(option);
-	}
+
+	)
+
 	var linearGradient2 = document.createElement("div");
 	linearGradient2.className = "linearGardientBottomToTop";
 	frame.append(linearGradient2);
