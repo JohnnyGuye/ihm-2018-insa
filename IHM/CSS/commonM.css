@@ -255,8 +255,9 @@ input {
 
 .roll 
 {
-  background: linear-gradient(to bottom, rgb(100,100,100), rgb(230,230,230), rgb(100,100,100));
-  border-radius: 2px / 50px;
+  background: rgb(230,230,230);
+  border-radius: 2px;
+  ;
 }
 
 .frame

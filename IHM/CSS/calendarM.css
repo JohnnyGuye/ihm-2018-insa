@@ -42,9 +42,9 @@
 }
 
 #calendar tbody tr {
-	height: 10vh;
+	/* height: 10vh; */
 }
-#calendar tbody tr td {
+#calendar  td {
 	text-align: center;
 	width: 14.28%;
 }
@@ -53,7 +53,8 @@
 {
 	position: relative;
 	margin: 0 auto;
-	width: 90%;
+	width: 90vw;
+	height: 90vw;
 	text-align: center;
 	-webkit-user-select: none; /* Safari */
 	-moz-user-select: none; /* Firefox */
@@ -63,7 +64,7 @@
 
 #calendar th
 {
-	padding: 2px;
+	height: 14.28%;
 }
 
 #calendar .dayPreviousMonth, #calendar .dayNextMonth
@@ -81,11 +82,11 @@
 .circleDay
 {
 	margin: 0 auto;
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	cursor: pointer;
 	border-radius: 50%;
-	padding: 3px;
+	padding: 7px;
 	line-height: 100%;
 	vertical-align: middle;
 	display: block;
@@ -115,6 +116,22 @@
 
 }
 
+.bubble2
+{
+	position: relative;
+	border-radius: 50%;
+	width: 8px;
+	height: 8px;
+	border: 1px solid grey;
+	text-align: center;
+	
+	margin-top:-1px;
+	background-color: grey;
+	left: 50%;
+	transform: translateX(-50%); 
+
+}
+
 .followBubbleEvent
 {
 	background-color: orange;
@@ -132,13 +149,11 @@
 .dateChooser
 {
 	position: relative;
-	height: 150px;
+	height: 250px;
 	width: 60vw;
 	text-align: center;
 	overflow: scroll;
 	margin: 1px;
-
-
 }
 
 .dateChoice div {
@@ -150,8 +165,8 @@
 
 .dateChoice
 {
-	padding-top: 60px;
-	padding-bottom: 60px; 
+	padding-top: 110px;
+	padding-bottom: 110px; 
 	color: black;
 
 }
@@ -175,14 +190,19 @@
 	vertical-align: middle;
 	line-height: 35px;
 	position: absolute;
-	right: -35px;
+	/*right: -30px;
+	padding-left: 5px;
+	text-align: left; */
+	 right: -37px; 
 	margin-left: 10%;
 	width: 35px;
 	background-color: rgba(228,38,24,1);
-	text-align: left;
+	
 	color: white;
 	cursor: pointer;
 	top: -1px;
+
+
 }
 
 .btnV::before
@@ -190,12 +210,77 @@
     display: block;
     position: absolute; 
     right: 35px;
+    right: 33px; 
     color: white;
     cursor: pointer;
-    border-top: 17.5px solid transparent;
+
+  border-top: 10px solid transparent;
+    border-right: 15px solid rgb(228,38,24);
+    border-bottom: 10px solid transparent; 
+
+     /*  border-top: 17.5px solid transparent;
     border-right: 25px solid rgb(228,38,24);
-    border-bottom: 17.5px solid transparent;
+    border-bottom: 17.5px solid transparent;  */
     height: 0px;
-    margin-top: 0px;
+   	color:	transparent;
+   margin-top: 7.5px; 
     content: ".";
+    font-size: 0px;
+}
+
+.tableDate
+{
+	text-align: center;
+	
+	margin: 0 auto;
+	padding: 10px;
+	margin-bottom: 10px;
+
+}
+
+#eventsList
+{
+	padding: 5px;
+}
+.tableDate tbody tr {
+	text-align: center;
+	display: block;
+	border: 1px solid rgb(79,77,80);
+	border-top: 0px;
+	min-height: 3em;
+	line-height: 1em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	vertical-align: center;
+	background-color: rgb(240,240,240);
+}
+
+.tableDate tbody tr td {
+	text-align: center;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.tableDate .titleDate {
+	background-color: rgb(228,38,24);
+	color: white;
+	height: 3em;
+	line-height: 3em;
+	vertical-align: center;
+}
+
+.tableDate .cellBubble {
+	width: 5%;
+}
+
+.tableDate .cellTime {
+	width: 15%;
+}
+
+.tableDate .cellName {
+	width: 40vw;
+}
+
+.tableDate .cellPlace {
+	width: 40vw;
 }

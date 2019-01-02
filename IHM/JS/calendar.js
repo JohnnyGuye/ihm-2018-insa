@@ -1,5 +1,6 @@
 var idCalendar = "calendar";
 var idMainDate = "mainDate";
+var idEventsList = "eventsList";
 
 var Calendar = function ()
 {
@@ -43,6 +44,7 @@ Calendar.prototype.init = function()
 {
 	this.display();
 	this.initBtnsDate();
+	this.initEventsList();
 }
 
 Calendar.prototype.addEvent = function(event) 
@@ -57,10 +59,95 @@ Calendar.prototype.addEvent = function(event)
 
 	if(!this.m_events.has(string))
 	{
-		this.m_events.set(string, [])
+		this.m_events.set(string, []);
 	}
 
-	this.m_events.get(string).push(event)
+	this.m_events.get(string).push(event);
+
+}
+
+Calendar.prototype.addEventToElement = function(element, date)
+{
+
+	var day = date.getDate();
+	var month = date.getMonth();
+	var year = date.getFullYear();
+
+	var string = day+"-"+month+"-"+year;
+	
+
+	if(!this.m_events.has(string))
+	{
+		return;
+	}
+
+	var events = this.m_events.get(string);
+	events.sort(compareEvents);
+	console.log(events);
+
+	var table = document.createElement("table");
+	table.className="tableDate";
+
+	var thead = document.createElement("thead");
+	var title = thead.insertRow();
+	var dayOfWeek = date.getDay()-1;
+	if (dayOfWeek < 0)
+	{
+		dayOfWeek = 6;
+	}
+
+	table.append(thead);
+
+	var tbody = document.createElement("tbody");
+	table.append(tbody);
+
+	title.textContent = Calendar.DAYS[dayOfWeek] + " " + day + " " + Calendar.MONTHS[this.m_monthPreview];
+	title.className="titleDate";
+
+	for (var i = 0; i < events.length; i++) 
+	{
+		var event = events[i];
+		
+		var importance = event.importance;
+		if (importance >= 0)
+		{
+			var dateEvent = event.date;
+			var eventElement =  tbody.insertRow();
+
+			var cellBubble = eventElement.insertCell();
+			cellBubble.className="cellBubble";
+			var bubble = document.createElement("div");
+			switch (importance)
+			{
+				case 0:
+					bubble.className="bubble2";
+				break;
+				case 1:
+					bubble.className="bubble2 followBubbleEvent";
+				break;
+				case 2:
+					bubble.className="bubble2 signInBubbleEvent";
+				break;
+			}
+			cellBubble.append(bubble);
+
+			var cellTime = eventElement.insertCell();
+			cellTime.className="cellTime";
+			cellTime.textContent = dateEvent.getHours() + ":"+dateEvent.getMinutes();
+
+			var cellName = eventElement.insertCell();
+			cellName.className="cellName";
+			cellName.textContent =  event.name;
+
+			var cellPlace = eventElement.insertCell();
+			cellPlace.className="cellPlace";
+			cellPlace.textContent =  event.place;
+
+		}	
+	}
+
+	
+	element.append(table); 
 
 }
 
@@ -182,6 +269,25 @@ Calendar.prototype.display = function()
 
 }
 
+Calendar.prototype.initEventsList = function() 
+{
+
+	var month =  this.m_monthPreview;
+	var year = this.m_yearPreview;
+
+	var div = document.getElementById(idEventsList);
+	div.innerHTML = "";
+	var nbDaysCurrent = new Date(year, month+1, 0).getDate();
+
+	var date = new Date(year, month, 1);
+
+	for (var i = 0; i < nbDaysCurrent; i++)
+	{
+		this.addEventToElement(div, date);
+		date.setDate(date.getDate()+1);
+	}
+}
+
 Calendar.prototype.initBtnsDate = function() 
 {
 	var calendar = this;
@@ -256,9 +362,7 @@ Calendar.prototype.translateMonth = function(nbMonth)
 	this.m_monthPreview = newMonth;
 	this.m_yearPreview = newYear;
 
-	this.display();
-	this.initBtnsDate();
-
+	this.init(); 
 }
 
 Calendar.prototype.translateYear = function(nbYear) 
@@ -267,9 +371,7 @@ Calendar.prototype.translateYear = function(nbYear)
 	var newYear = this.m_yearPreview + nbYear;
 	this.m_yearPreview = newYear;
 
-	this.display();
-	this.initBtnsDate();
-
+	this.init(); 
 }
 
 

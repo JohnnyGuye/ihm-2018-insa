@@ -46,9 +46,10 @@ Vue.component(
           <tbody>
           </tbody>
         </table>
+        <hr /> 
+        <div id="eventsList">
+        </div>
       </div>
-
-
     </base-layout>
     `
   }

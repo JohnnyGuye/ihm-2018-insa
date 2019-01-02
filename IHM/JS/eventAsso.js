@@ -25,3 +25,31 @@ function EventAsso( name, date, place, asso, imageURI, importance ) {
 	)
 
 }
+
+function compareEvents(event1, event2) 
+{
+
+  if (event1.importance < event2.importance)
+  {
+  	return 1;
+  }
+  else if (event1.importance > event2.importance)
+  {
+  	return -1;
+  }
+  else
+  {
+  	if (event1.date < event2.date)
+	{
+		return 1;
+	}
+	else if (event1.date > event2.date)
+	{
+		return -1;
+	}
+	else
+	{
+		return 0;
+	}
+  }
+}
