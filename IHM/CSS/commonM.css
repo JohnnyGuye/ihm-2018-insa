@@ -253,13 +253,16 @@ input {
 	color: rgb(79,77,80);
 }
 
+.roll 
+{
+  background: linear-gradient(to bottom, rgb(100,100,100), rgb(230,230,230), rgb(100,100,100));
+}
 
 .frame
 {
 	position: fixed;
 	z-index: 1;
 	border: 1px solid rgb(79,77,80);
-	background-color: rgb(230,230,230);
 	padding: 2px;
 	top: 50%;
 	left: 50%;
