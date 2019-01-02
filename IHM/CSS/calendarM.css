@@ -128,16 +128,6 @@
 	border-color: rgba(228,38,24, 0.7);
 }
 
-.dateChooser::before {
- position: absolute;
-	top: 2px;
-	right: 2px;
-	left: 2px;
-	height: 100px;
-	background: linear-gradient(to bottom, rgb(230,230,230), transparent);
-	display: block;
-	z-index: 1;
-}
 
 .dateChooser
 {
@@ -174,7 +164,7 @@
 	height: 35px;
 	position: fixed;
 	z-index: 1;
-	width: 80%;
+	width: 90%;
 	border: 1px solid black;
 
 }
@@ -185,10 +175,27 @@
 	vertical-align: middle;
 	line-height: 35px;
 	position: absolute;
-	right: -38px;
+	right: -35px;
+	margin-left: 10%;
 	width: 35px;
-	background-color: rgb(228,38,24);
+	background-color: rgba(228,38,24,1);
+	text-align: left;
 	color: white;
 	cursor: pointer;
 	top: -1px;
+}
+
+.btnV::before
+{
+    display: block;
+    position: absolute; 
+    right: 35px;
+    color: white;
+    cursor: pointer;
+    border-top: 17.5px solid transparent;
+    border-right: 25px solid rgb(228,38,24);
+    border-bottom: 17.5px solid transparent;
+    height: 0px;
+    margin-top: 0px;
+    content: ".";
 }
