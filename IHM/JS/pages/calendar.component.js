@@ -29,7 +29,8 @@ Vue.component(
       </template>
 
       <div>
-        <div id="mainDate"></div>
+
+        <div class="mainDate"></div>
         <hr />
         <table id="calendar">
           <thead>
@@ -49,6 +50,8 @@ Vue.component(
         <hr /> 
         <div id="eventsList">
         </div>
+        <div class="mainDate"></div>
+        <hr />
       </div>
     </base-layout>
     `

@@ -1,4 +1,4 @@
-#mainDate
+.mainDate
 {
 	margin: 0 auto;
 	position: relative;
@@ -21,12 +21,12 @@
 	background: rgba(50,50,50,0.2);
 }
 
-#leftArrow
+.leftArrow
 {
 	left: 20px;
 }
 
-#rightArrow
+.rightArrow
 {
 	right: 20px;
 }
@@ -35,11 +35,15 @@
 	cursor: pointer;
 	padding: 2px;
 	position: absolute;
+	height: 100%;
+	line-height: 100%;
 }
 .arrow:hover
 {
 	background: rgba(50,50,50,0.2);
 }
+
+
 
 #calendar tbody tr {
 	/* height: 10vh; */
@@ -82,8 +86,8 @@
 .circleDay
 {
 	margin: 0 auto;
-	width: 30px;
-	height: 30px;
+	width: 32px;
+	height: 32px;
 	cursor: pointer;
 	border-radius: 50%;
 	padding: 7px;
@@ -214,7 +218,7 @@
     color: white;
     cursor: pointer;
 
-  border-top: 10px solid transparent;
+  	border-top: 10px solid transparent;
     border-right: 15px solid rgb(228,38,24);
     border-bottom: 10px solid transparent; 
 
@@ -235,12 +239,14 @@
 	margin: 0 auto;
 	padding: 10px;
 	margin-bottom: 10px;
+	width: 100%;
 
 }
 
 #eventsList
 {
-	padding: 5px;
+	margin: 0 auto;
+	width: 90vw;
 }
 .tableDate tbody tr {
 	text-align: center;
@@ -252,7 +258,7 @@
 	padding-top: 1em;
 	padding-bottom: 1em;
 	vertical-align: center;
-	background-color: rgb(240,240,240);
+	
 }
 
 .tableDate tbody tr td {
@@ -267,6 +273,7 @@
 	height: 3em;
 	line-height: 3em;
 	vertical-align: center;
+	position: relative;
 }
 
 .tableDate .cellBubble {
@@ -278,9 +285,31 @@
 }
 
 .tableDate .cellName {
-	width: 40vw;
+	width: 40%;
 }
 
 .tableDate .cellPlace {
-	width: 40vw;
+	width: 40%;
+}
+
+.arrow2 
+{
+	cursor: pointer;
+	padding: 2px;
+	position: absolute;
+	line-height: 20px;
+	vertical-align: bottom;
+	margin-top: 8px;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	transition: all 0.2s;
+
+}
+
+.arrow2:hover
+{
+	background-color: white;
+	color: rgba(228,38,24,1);
+
 }

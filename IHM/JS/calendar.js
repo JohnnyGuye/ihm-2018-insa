@@ -1,5 +1,5 @@
 var idCalendar = "calendar";
-var idMainDate = "mainDate";
+var classMainDate = "mainDate";
 var idEventsList = "eventsList";
 
 var Calendar = function ()
@@ -66,7 +66,7 @@ Calendar.prototype.addEvent = function(event)
 
 }
 
-Calendar.prototype.addEventToElement = function(element, date)
+Calendar.prototype.addEventsDayToElement = function(element, date)
 {
 
 	var day = date.getDate();
@@ -83,10 +83,12 @@ Calendar.prototype.addEventToElement = function(element, date)
 
 	var events = this.m_events.get(string);
 	events.sort(compareEvents);
-	console.log(events);
 
 	var table = document.createElement("table");
 	table.className="tableDate";
+	table.id="events-"+day;
+	table.setAttribute("value", day);
+
 
 	var thead = document.createElement("thead");
 	var title = thead.insertRow();
@@ -96,13 +98,35 @@ Calendar.prototype.addEventToElement = function(element, date)
 		dayOfWeek = 6;
 	}
 
+	title.innerHTML = Calendar.DAYS[dayOfWeek] + " " + day + " " + Calendar.MONTHS[this.m_monthPreview];
+	title.className="titleDate";
+
+	var leftArrowSpan = document.createElement("span");
+	leftArrowSpan.className="arrow2 leftArrow";
+	leftArrowSpan.innerHTML="&larr;";
+
+	title.append(leftArrowSpan);
+
+	leftArrowSpan.addEventListener("click", function()
+	{
+		previousEvent(table);
+	});
+
+	var rightArrowSpan = document.createElement("span");
+	rightArrowSpan.className="arrow2 rightArrow";
+	rightArrowSpan.innerHTML="&rarr;";
+
+	rightArrowSpan.addEventListener("click", function()
+	{
+		nextEvent(table);
+	});
+
+	title.append(rightArrowSpan);
+
 	table.append(thead);
 
 	var tbody = document.createElement("tbody");
 	table.append(tbody);
-
-	title.textContent = Calendar.DAYS[dayOfWeek] + " " + day + " " + Calendar.MONTHS[this.m_monthPreview];
-	title.className="titleDate";
 
 	for (var i = 0; i < events.length; i++) 
 	{
@@ -151,14 +175,17 @@ Calendar.prototype.addEventToElement = function(element, date)
 
 }
 
+
 Calendar.prototype.display = function() 
 {
 	var month =  this.m_monthPreview;
 	var year = this.m_yearPreview;
 
+	var calendar = this;
 
-	var calendar = document.getElementById(idCalendar).tBodies[0];
-	calendar.innerHTML = "";
+
+	var calendarEl = document.getElementById(idCalendar).tBodies[0];
+	calendarEl.innerHTML = "";
 
 	var previousDate = new Date(year, month-1);
 	var date =  new Date(year, month);
@@ -200,9 +227,10 @@ Calendar.prototype.display = function()
 	}
 
 
+
 	for (var i = 0; i < nbWeeks; i++)
 	{
-		var row = calendar.insertRow();
+		var row = calendarEl.insertRow();
 		for (var j = 0; j < 7; j++)
 		{
 			var cell = row.insertCell();
@@ -213,20 +241,45 @@ Calendar.prototype.display = function()
 			{
 				numDay = 1;
 				currentMonth = date.getMonth();
+				cell.addEventListener("click", function()
+				{
+					var num = this.getAttribute("value");
+					calendar.scrollToEnventsDay(num);
+				});
 			}
 			else if (currentMonth==previousDate.getMonth())
 			{
 				cell.className="dayPreviousMonth greyTextINSA";
+				cell.addEventListener("click", function()
+				{
+					calendar.translateMonth(-1);
+				});
 			}
 			else if (currentMonth==date.getMonth() && numDay>nbDaysCurrent)
 			{
 				numDay = 1;
 				cell.className="dayNextMonth greyTextINSA";
 				currentMonth = nextDate.getMonth();
+				cell.addEventListener("click", function()
+				{
+					calendar.translateMonth(1);
+				});
 			}
 			else if (currentMonth==nextDate.getMonth())
 			{
 				cell.className="dayNextMonth greyTextINSA";
+				cell.addEventListener("click", function()
+				{
+					calendar.translateMonth(1);
+				});
+			}
+			else
+			{
+				cell.addEventListener("click", function()
+				{
+					var num = this.getAttribute("value");
+					calendar.scrollToEnventsDay(num);
+				});
 			}
 
 			if (currentMonth==this.m_todayDate.getMonth() && displayToday && this.m_todayDate.getDate() == numDay)
@@ -261,6 +314,7 @@ Calendar.prototype.display = function()
 			}
 
 			circularDiv.className="circleDay greyTextINSA";
+			cell.setAttribute("value",numDay);
 			numDay++;
 			cell.append(circularDiv);
 		}
@@ -283,7 +337,7 @@ Calendar.prototype.initEventsList = function()
 
 	for (var i = 0; i < nbDaysCurrent; i++)
 	{
-		this.addEventToElement(div, date);
+		this.addEventsDayToElement(div, date);
 		date.setDate(date.getDate()+1);
 	}
 }
@@ -295,51 +349,53 @@ Calendar.prototype.initBtnsDate = function()
 	var month =  this.m_monthPreview;
 	var year = this.m_yearPreview;
 
-	var mainDate = document.getElementById(idMainDate);
-	mainDate.innerHTML = "";
-
-	var leftArrowSpan = document.createElement("span");
-	leftArrowSpan.id="leftArrow";
-	leftArrowSpan.className="arrow";
-	leftArrowSpan.innerHTML="&larr;";
-
-	var monthSpan = document.createElement("span");
-	monthSpan.id="btnMonth";
-	monthSpan.className="btnDate";
-	monthSpan.textContent= Calendar.MONTHS[month];
-	monthSpan.addEventListener("click", function()
+	var mainDates = document.getElementsByClassName(classMainDate);
+	for (var i = 0; i < mainDates.length; i++)
 	{
-		calendar.chooseMonth();
-	});
+		mainDate = mainDates[i];
+		mainDate.innerHTML = "";
+
+		var leftArrowSpan = document.createElement("span");
+		leftArrowSpan.className="arrow leftArrow";
+		leftArrowSpan.innerHTML="&larr;";
+
+		var monthSpan = document.createElement("span");
+		monthSpan.id="btnMonth";
+		monthSpan.className="btnDate";
+		monthSpan.textContent= Calendar.MONTHS[month];
+		monthSpan.addEventListener("click", function()
+		{
+			calendar.chooseMonth();
+		});
 
 
-	var yearSpan = document.createElement("span");
-	yearSpan.id="btnYear";
-	yearSpan.className="btnDate";
-	yearSpan.textContent=year;
-	yearSpan.addEventListener("click", function()
-	{
-		calendar.chooseYear();
-	});
+		var yearSpan = document.createElement("span");
+		yearSpan.id="btnYear";
+		yearSpan.className="btnDate";
+		yearSpan.textContent=year;
+		yearSpan.addEventListener("click", function()
+		{
+			calendar.chooseYear();
+		});
 
-	var rightArrowSpan = document.createElement("span");
-	rightArrowSpan.id="rightArrow";
-	rightArrowSpan.className="arrow";
-	rightArrowSpan.innerHTML="&rarr;";
+		var rightArrowSpan = document.createElement("span");
+		rightArrowSpan.className="arrow rightArrow";
+		rightArrowSpan.innerHTML="&rarr;";
 
-	mainDate.append(leftArrowSpan);
-	mainDate.append(monthSpan);
-	mainDate.append(yearSpan);
-	mainDate.append(rightArrowSpan);
+		mainDate.append(leftArrowSpan);
+		mainDate.append(monthSpan);
+		mainDate.append(yearSpan);
+		mainDate.append(rightArrowSpan);
 
-	leftArrowSpan.addEventListener("click", function()
-	{
-		calendar.translateMonth(-1);
-	});
-	rightArrowSpan.addEventListener("click", function()
-	{
-		calendar.translateMonth(+1);
-	});
+		leftArrowSpan.addEventListener("click", function()
+		{
+			calendar.translateMonth(-1);
+		});
+		rightArrowSpan.addEventListener("click", function()
+		{
+			calendar.translateMonth(+1);
+		});
+	}
 
 }
 
@@ -669,6 +725,89 @@ Calendar.prototype.chooseMonth = function()
 
 }
 
+Calendar.prototype.scrollToEnventsDay = function(numDay) 
+{
+	var elementEvent = document.getElementById('events-'+numDay);
+	var el = document.getElementsByClassName('content')[0];
+
+	var date = new Date(this.m_yearPreview, this.m_monthPreview, numDay);
+
+	if (elementEvent)
+	{
+
+		el.scrollTop += elementEvent.offsetTop - el.scrollTop  - el.offsetTop;
+	}
+	else
+	{
+		var end = true;
+		var elementAfter;
+		var tables = document.getElementsByClassName("tableDate");
+		for (var i = 0; i < tables.length; i++)
+		{
+			elementAfter = tables[i];
+			var num = elementAfter.getAttribute("value");
+
+			var gap = numDay - num;
+			console.log("1 " + numDay);
+			console.log("2 " + num);
+			console.log("3 " + gap);
+			if (gap < 0)
+			{
+				end = false;
+				break;
+			}
+
+		}
+
+
+
+
+		var table = document.createElement("table");
+		table.className="tableDate temp";
+		table.id="events-"+numDay;
+
+
+		var thead = document.createElement("thead");
+		var title = thead.insertRow();
+		var dayOfWeek = date.getDay()-1;
+		if (dayOfWeek < 0)
+		{
+			dayOfWeek = 6;
+		}
+
+		title.innerHTML = Calendar.DAYS[dayOfWeek] + " " + numDay + " " + Calendar.MONTHS[this.m_monthPreview];
+		title.className="titleDate";
+
+
+		table.append(thead);
+
+		var tbody = document.createElement("tbody");
+		table.append(tbody);
+
+		
+		var line = tbody.insertRow();
+		line.textContent = "+ Ajouter un événement";
+	
+		if (end)
+		{
+			elementAfter.parentNode.append(table);
+		}
+		else
+		{
+			elementAfter.parentNode.insertBefore(table, elementAfter);
+		}
+
+		document.body.addEventListener("mousedown", removeTableDay);
+
+		table.addEventListener("mousedown", function(event)
+		{
+			event.stopPropagation();
+		});
+
+		this.scrollToEnventsDay(numDay);
+
+	}
+};
 
 function changeOptionRoll (select, option, target)
 {
@@ -700,4 +839,46 @@ function stabilizeRoll(select, options, target)
 
 	select.scrollTop+=min;
 	return optionChoosen
+}
+
+function removeTableDay (event)
+{
+
+	var temps = document.getElementsByClassName("temp");
+	for (var i = 0; i < temps.length; i++)
+	{
+		var temp = temps[i];
+		temp.parentNode.removeChild(temp);
+	}
+	document.body.removeEventListener("click", removeTableDay);
+}
+
+function nextEvent(elementEvent)
+{
+	var elementNextEvent = elementEvent.nextSibling;
+	var el = document.getElementsByClassName('content')[0];
+	if (elementNextEvent)
+	{
+		el.scrollTop += elementNextEvent.offsetTop - el.scrollTop  - el.offsetTop;
+	}
+	else
+	{
+		el.scrollTop = el.scrollHeight;
+	}
+	
+}
+
+function previousEvent(elementEvent)
+{
+	var elementPreviousEvent = elementEvent.previousSibling;
+	var el = document.getElementsByClassName('content')[0];
+
+	if (elementPreviousEvent)
+	{
+		el.scrollTop += elementPreviousEvent.offsetTop - el.scrollTop  - el.offsetTop; 
+	}
+	else
+	{
+		el.scrollTop = 0;
+	}
 }
