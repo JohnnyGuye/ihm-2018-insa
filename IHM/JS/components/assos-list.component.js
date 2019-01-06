@@ -27,6 +27,7 @@ Vue.component(
 
       <div slot="header">
         Assos
+            <i class="fas fa-angle-double-up"></i>
       </div>
 
       <template slot="footer">
