@@ -71,6 +71,7 @@ header {
 
 .content {
 	padding: 10px;
+  /* padding-bottom: 60px; */
 	box-sizing: border-box;
 	width: calc( 100vw );
 	height: calc( 100vh - 120px );
@@ -79,6 +80,10 @@ header {
   scroll-behavior: smooth;
 }
 
+.contentPage
+{
+  padding-bottom: 50px;
+}
 footer {
 	padding: 10px;
 	box-sizing: border-box;
@@ -92,6 +97,11 @@ footer {
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
+}
+
+.littleWhiteLine
+{
+  margin-bottom: 10px;
 }
 
 .icon-btn {

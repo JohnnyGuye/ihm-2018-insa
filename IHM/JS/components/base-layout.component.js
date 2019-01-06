@@ -42,7 +42,9 @@ Vue.component(
     </header>
     <main class="content">
       <div class="fabButton up z-index-2" onclick="up()"><i class="fas fa-angle-double-up"></i></div>
+      <div class="contentPage">
       <slot></slot>
+      </div>
     </main>
     <footer class="z-index-1 primary-bg">
       <button class="icon-btn" onclick="nav.navigate('feed')" v-bind:class="{ active: currentRoute == 'feed' }"><i class="fas fa-money-check"></i></button>
