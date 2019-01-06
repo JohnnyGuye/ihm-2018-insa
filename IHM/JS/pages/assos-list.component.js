@@ -5,6 +5,7 @@ Vue.component(
         selectedAsso: null,
         selectedAssoEvents: [],
         showModal: false,
+        showContact: false,
         segment: "description",
         assos: Injector.resolve( "AssoService" ).assos,
         nav: Injector.resolve( "Navigation" )
@@ -15,7 +16,9 @@ Vue.component(
         this.selectedAsso = asso
         this.selectedAssoEvents = this.getMatchingAssoEvents( asso )
         this.showModal = true
-        console.log("open")
+      },
+      openContact( ) {
+        this.showContact = true
       },
       getMatchingAssoEvents( asso ) {
         return Injector.resolve( "EventService" ).getMatchingAssoEvents( asso.name )
@@ -55,6 +58,7 @@ Vue.component(
         </li>
       </ul>
 
+      <!-- Modal of selected association -->
       <modal-page v-bind:shown="showModal" v-on:close="showModal = $event" v-if="selectedAsso">
 
         <div class="container">
@@ -68,7 +72,7 @@ Vue.component(
               <h3>{{ selectedAsso.name }}</h3>
               <div class="row">
                 <div class="col col-6">
-                  <button class="asso-insight">Contacter</button>
+                  <button class="asso-insight" v-on:click="openContact()">Contacter</button>
                 </div>
                 <div class="col col-6">
                   <button class="followable" v-bind:class="{ unfollow: !selectedAsso.followed }" v-on:click="selectedAsso.followed = !selectedAsso.followed"></button>
@@ -95,6 +99,40 @@ Vue.component(
         </div>
 
       </modal-page>
+
+      <!-- Modal of contact association -->
+      <modal-page v-bind:shown="showContact" v-on:close="showContact = $event" v-if="selectedAsso">
+        <div class="container">
+          <div class="row">
+
+            <div class="col col-3">
+              <img v-bind:src="selectedAsso.logoURI" height="60" width="60">
+            </div>
+
+            <div class="col col-9">
+              <h3>{{ selectedAsso.name }}</h3>
+            </div>
+
+          </div>
+
+          <div class="row" style="padding: 5px;">
+            <h4 style="width: 100%">Formulaire de contact</h4>
+            <br/>
+            <p>Objet :</p>
+            <input class="form-control" style="width: 100%" type="text" placeholder="J'aimerais m'inscrire"/>
+            <p>Message :</p>
+            <textarea  class="form-control" placeholder="Mais je ne sais pas où trouver l'asso" style="width: 100%; min-height: 40vh"></textarea>
+          </div>
+
+          <div class="row text-center">
+            <button class="btn btn-sm btn-outline-secondary text-center" style="margin:auto">Envoyer</button>
+          </div>
+        </div>
+
+      </modal-page>
+
+
+
 
     </base-layout>
     `

@@ -14,11 +14,11 @@ body {
   overflow: hidden;
 }
 
-.handwritten * {
+.handwritten *:not(.fas) {
   font-family: "Indie Flower", sans-serif;
 }
 
-.geeky * {
+.geeky *:not(.fas) {
   font-family: "VT323", sans-serif;
 }
 
