@@ -101,6 +101,7 @@ Calendar.prototype.addEventsDayToElement = function(element, date)
 	title.innerHTML = Calendar.DAYS[dayOfWeek] + " " + day + " " + Calendar.MONTHS[this.m_monthPreview];
 	title.className="titleDate";
 
+	/*
 	var leftArrowSpan = document.createElement("span");
 	leftArrowSpan.className="arrow2 leftArrow";
 	leftArrowSpan.innerHTML="&larr;";
@@ -122,6 +123,7 @@ Calendar.prototype.addEventsDayToElement = function(element, date)
 	});
 
 	title.append(rightArrowSpan);
+	*/
 
 	table.append(thead);
 
@@ -157,7 +159,19 @@ Calendar.prototype.addEventsDayToElement = function(element, date)
 
 			var cellTime = eventElement.insertCell();
 			cellTime.className="cellTime";
-			cellTime.textContent = dateEvent.getHours() + ":"+dateEvent.getMinutes();
+			var hours = dateEvent.getHours();
+			if (hours < 10)
+			{
+				hours="0"+hours;
+			}	
+
+			var minutes = dateEvent.getMinutes();
+			if (minutes < 10)
+			{
+				minutes="0"+minutes;
+			}	
+			var minutes 
+			cellTime.textContent += hours + ":"+ minutes;
 
 			var cellName = eventElement.insertCell();
 			cellName.className="cellName";
@@ -748,9 +762,6 @@ Calendar.prototype.scrollToEnventsDay = function(numDay)
 			var num = elementAfter.getAttribute("value");
 
 			var gap = numDay - num;
-			console.log("1 " + numDay);
-			console.log("2 " + num);
-			console.log("3 " + gap);
 			if (gap < 0)
 			{
 				end = false;
@@ -853,6 +864,7 @@ function removeTableDay (event)
 	document.body.removeEventListener("click", removeTableDay);
 }
 
+/*
 function nextEvent(elementEvent)
 {
 	var elementNextEvent = elementEvent.nextSibling;
@@ -881,4 +893,4 @@ function previousEvent(elementEvent)
 	{
 		el.scrollTop = 0;
 	}
-}
+} */
