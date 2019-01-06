@@ -48,6 +48,7 @@ Vue.component(
             </div>
           </div>
         </li>
+          <br style='margin-bottom:10px'/>
       </ul>
 
       <!-- Modal of selected association -->

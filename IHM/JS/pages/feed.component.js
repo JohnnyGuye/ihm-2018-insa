@@ -17,7 +17,7 @@ Vue.component('feed', {
              </v-flex>
          </v-layout>
       </v-container>
-
+      <hr />
     </base-layout>
     `
 })
