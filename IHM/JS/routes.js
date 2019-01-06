@@ -4,5 +4,6 @@ const routes = {
   'home' : 'about',
   'feed' : 'feed',
   'calendar' : 'calendar',
-  'assos' : 'assos-list'
+  'assos' : 'assos-list',
+  'options' : 'params'
 }

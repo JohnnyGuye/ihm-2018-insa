@@ -4,30 +4,28 @@ Vue.component(
     mounted() {
         var el = document.getElementsByClassName('content')[0];
         var up = document.getElementsByClassName('up')[0];
-        el.addEventListener('wheel', function(e) 
-        {
-          if (this.scrollTop == 0)
+
+        let fun = (el) => {
+          if (el.scrollTop == 0)
           {
-            up.style.opacity="0";
-          } 
+            up.style.opacity = "0";
+            setTimeout( () => { up.style.display = "none" }, 250 )
+          }
           else
           {
-            up.style.opacity="1";
+            up.style.display = "block"
+            setTimeout( () => { up.style.opacity = "1" }, 1 );
           }
+        }
 
-        }); 
+        el.addEventListener('wheel', function(e)
+        {
+          fun(this)
+        });
 
         el.addEventListener('scroll', function(e)
         {
-          if (this.scrollTop == 0)
-          {
-              up.style.opacity="0";
-          } 
-          else
-          {
-              up.style.opacity="1";
-          }
-         
+          fun(this)
         }, true);
     },
     template:
@@ -36,9 +34,9 @@ Vue.component(
     <header class="z-index-1 primary-bg">
       <div class="fabButton addEvent"  onclick="addEvent()">+</div>
       <slot name="header"></slot>
-      <div class="fabButton up" onclick="up()">↟</div>
     </header>
     <main class="content">
+      <div class="fabButton up z-index-2" onclick="up()">↟</div>
       <slot></slot>
     </main>
     <footer class="z-index-1 primary-bg">
@@ -56,5 +54,5 @@ function up()
   var el = document.getElementsByClassName('content')[0];
   el.scrollTop = 0;
   up.style.opacity="0";
-  
+
 }

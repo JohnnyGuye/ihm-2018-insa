@@ -28,7 +28,7 @@ Vue.component(
         <br/>
         <br/>
         <div style="display: flex; align-items: center; justify-content: center; margin-top: 20px;">
-          <button type="button" class="btn btn-light btn-lg" v-on:click="nav.navigate('home')"><a>Se connecter</a></button>
+          <button type="button" class="btn btn-light btn-lg" v-on:click="nav.navigate('feed')"><a>Se connecter</a></button>
         </div>
       </div>
     </div>

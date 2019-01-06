@@ -1,4 +1,4 @@
-*, body {
+*, body, .neutral {
   font-family: "Ubuntu", sans-serif;
 }
 
@@ -14,10 +14,26 @@ body {
   overflow: hidden;
 }
 
-body.handwritten,
 .handwritten * {
   font-family: "Indie Flower", sans-serif;
 }
+
+.geeky * {
+  font-family: "VT323", sans-serif;
+}
+
+.neutral {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.geeky {
+  font-family: "VT323", sans-serif;
+}
+
+.handwritten {
+  font-family: "Indie Flower", sans-serif;
+}
+
 
 hr {
   margin-top: 10px;
@@ -317,29 +333,29 @@ input {
 
 .fabButton
 {
+  position: absolute;
+  bottom: 60px;
+  right: 0px;
+  z-index: 101;
+  margin: 10px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: transparent;
+  background-color: rgb(228,38,24);
   cursor: pointer;
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
   position: absolute;
-  border: 1px solid rgb(228,38,24);
-  color: rgb(228,38,24);
+  color: white;
   text-align: center;
-  font-size: 40px;
-  line-height: 100%;
+  font-size: 30px;
   vertical-align: middle;
-
-
+  line-height: 40px;
 }
 
-.up 
+.up
 {
   opacity: 0;
-  right: 20px;
-
 }
 
 .addEvent
