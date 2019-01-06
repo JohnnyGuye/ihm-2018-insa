@@ -30,15 +30,7 @@ Vue.component(
 
       <div slot="header">
         Assos
-            <i class="fas fa-angle-double-up"></i>
       </div>
-
-      <template slot="footer">
-        <button class="icon-btn icon-home" onclick="nav.navigate('feed')"></button>
-        <button class="icon-btn icon-calendar" onclick="nav.navigate('calendar')"></button>
-        <button class="icon-btn icon-list active" onclick="nav.navigate('assos')"></button>
-        <button class="icon-btn icon-tool" onclick="nav.navigate('options')"></button>
-      </template>
 
       <ul class="list-group list-group-flush">
         <li class="list-group-item" v-for="asso in assos">

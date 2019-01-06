@@ -21,13 +21,6 @@ Vue.component(
         Calendrier
       </div>
 
-      <template slot="footer">
-        <button class="icon-btn icon-home" onclick="nav.navigate('feed')"></button>
-        <button class="icon-btn icon-calendar active" onclick="nav.navigate('calendar')"></button>
-        <button class="icon-btn icon-list" onclick="nav.navigate('assos')"></button>
-        <button class="icon-btn icon-tool" onclick="nav.navigate('options')"></button>
-      </template>
-
       <div>
 
         <div class="mainDate"></div>
@@ -47,7 +40,7 @@ Vue.component(
           <tbody>
           </tbody>
         </table>
-        <hr /> 
+        <hr />
         <div id="eventsList">
         </div>
         <div class="mainDate"></div>

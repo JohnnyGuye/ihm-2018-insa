@@ -17,13 +17,6 @@ Vue.component(
         Options
       </div>
 
-      <template slot="footer">
-        <button class="icon-btn icon-home" onclick="nav.navigate('feed')"></button>
-        <button class="icon-btn icon-calendar" onclick="nav.navigate('calendar')"></button>
-        <button class="icon-btn icon-list" onclick="nav.navigate('assos')"></button>
-        <button class="icon-btn icon-tool active" onclick="nav.navigate('options')"></button>
-      </template>
-
       <div>
 
         <h2>Changer de police</h2>

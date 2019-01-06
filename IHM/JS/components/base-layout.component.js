@@ -1,6 +1,11 @@
 Vue.component(
   'base-layout', {
     props: [],
+    data: function () {
+      return {
+        currentRoute: nav.currentRoute
+      }
+    },
     mounted() {
         var el = document.getElementsByClassName('content')[0];
         var up = document.getElementsByClassName('up')[0];
@@ -36,11 +41,14 @@ Vue.component(
       <slot name="header"></slot>
     </header>
     <main class="content">
-      <div class="fabButton up z-index-2" onclick="up()">↟</div>
+      <div class="fabButton up z-index-2" onclick="up()"><i class="fas fa-angle-double-up"></i></div>
       <slot></slot>
     </main>
     <footer class="z-index-1 primary-bg">
-      <slot name="footer"></slot>
+      <button class="icon-btn" onclick="nav.navigate('feed')" v-bind:class="{ active: currentRoute == 'feed' }"><i class="fas fa-money-check"></i></button>
+      <button class="icon-btn" onclick="nav.navigate('calendar')" v-bind:class="{ active: currentRoute == 'calendar' }"><i class="fas fa-calendar-alt"></i></button>
+      <button class="icon-btn" onclick="nav.navigate('assos')" v-bind:class="{ active: currentRoute == 'assos' }"><i class="fas fa-th-list"></i></button>
+      <button class="icon-btn" onclick="nav.navigate('options')" v-bind:class="{ active: currentRoute == 'options' }"><i class="fas fa-cog"></i></button>
     </footer>
     </div>
     `
