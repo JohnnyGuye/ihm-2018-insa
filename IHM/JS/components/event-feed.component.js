@@ -52,7 +52,7 @@ Vue.component('feed-event', {
           <div class="moreOption"  v-on:click="openOption">...</div>
           <ul class="moreOptionMenu" style="display:none">
             <hr />
-            <li class="followEvtOpt">Suivre l'événement</li>
+            <li class="followEvtOpt" v-bind:class="{ unfollow: event.importance=1 }"   v-on:click="event.importance =1+event.importance ">Suivre l'événement</li>
             <li class="HideEvtOpt">Masquer l'événement</li>
             <li class="HideEvtAssoOpt">Masquer les événements de {{event.asso}}</li>
             <li class="ShowDetEvt">Plus de détails</li>
