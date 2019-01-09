@@ -255,10 +255,12 @@ Calendar.prototype.display = function()
 			{
 				numDay = 1;
 				currentMonth = date.getMonth();
-				cell.addEventListener("click", function()
+				cell.addEventListener("click", function(event)
 				{
+					event.stopPropagation();
 					var num = this.getAttribute("value");
 					calendar.scrollToEnventsDay(num);
+
 				});
 			}
 			else if (currentMonth==previousDate.getMonth())
@@ -289,8 +291,9 @@ Calendar.prototype.display = function()
 			}
 			else
 			{
-				cell.addEventListener("click", function()
+				cell.addEventListener("click", function(event)
 				{
+					event.stopPropagation();
 					var num = this.getAttribute("value");
 					calendar.scrollToEnventsDay(num);
 				});
@@ -741,6 +744,8 @@ Calendar.prototype.chooseMonth = function()
 
 Calendar.prototype.scrollToEnventsDay = function(numDay) 
 {
+	removeTableDay(); 
+
 	var elementEvent = document.getElementById('events-'+numDay);
 	var el = document.getElementsByClassName('content')[0];
 
@@ -798,24 +803,26 @@ Calendar.prototype.scrollToEnventsDay = function(numDay)
 		
 		var line = tbody.insertRow();
 		line.textContent = "+ Ajouter un événement";
+
+		var parent = document.getElementById("eventsList");
 	
 		if (end)
 		{
-			elementAfter.parentNode.append(table);
+			parent.append(table);
 		}
 		else
 		{
-			elementAfter.parentNode.insertBefore(table, elementAfter);
+			parent.insertBefore(table, elementAfter);
 		}
 
-		document.body.addEventListener("mousedown", removeTableDay);
+		document.body.addEventListener("click", removeTableDay, {once:true});
 
-		table.addEventListener("mousedown", function(event)
+		table.addEventListener("click", function(event)
 		{
 			event.stopPropagation();
 		});
 
-		this.scrollToEnventsDay(numDay);
+		el.scrollTop += table.offsetTop - el.scrollTop  - el.offsetTop;
 
 	}
 };
@@ -852,16 +859,15 @@ function stabilizeRoll(select, options, target)
 	return optionChoosen
 }
 
-function removeTableDay (event)
+function removeTableDay ()
 {
-
 	var temps = document.getElementsByClassName("temp");
 	for (var i = 0; i < temps.length; i++)
 	{
 		var temp = temps[i];
 		temp.parentNode.removeChild(temp);
 	}
-	document.body.removeEventListener("click", removeTableDay);
+	//document.body.removeEventListener("click", removeTableDay);
 }
 
 /*
