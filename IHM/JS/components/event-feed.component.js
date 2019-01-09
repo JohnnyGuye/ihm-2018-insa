@@ -44,7 +44,6 @@ Vue.component('feed-event', {
 
       classOptionsEvent (event, option)
       {
-        console.log(option);
         var assoService = Injector.resolve( [ "AssoService" ] )[0];
         switch(option)
         {
@@ -52,28 +51,31 @@ Vue.component('feed-event', {
             return {
               "redINSA optionUnfollow" : event.importance == 2,
               "greyINSA optionFollow" : event.importance == 1,
-              "resgisteredEvt" : event.importance == 3
+              "resgisteredEvt" : event.importance == 3,
+              "hideOption" : event.importance == 0
 
 
             }
          break;
 
           case 1:
+          console.log(event.importance);
           return {
              "hideOption" : event.importance > 1,
              "greyINSA optionHide" : event.importance == 1,
-             "redINSA optionUnhide" : event.importance == 0
+             "redINSA optionUnhide" : event.importance == 0,
+             "hideOption" : event.importance == -1
           }
 
           break;
 
           case 2:
           var asso = event.asso;
-          console.log(assoService.isHide(event.asso));
+          var hide = assoService.isHide(event.asso);
           return {
              "hideOption" : event.importance > 1,
-             "greyINSA optionHideA" : assoService.isHide(asso) == true,
-             "redINSA optionUnhideA" : assoService.isHide(asso) == false
+             "greyINSA optionHideA" : !hide,
+             "redINSA optionUnhideA" : hide
           }
 
           break;
@@ -104,29 +106,23 @@ Vue.component('feed-event', {
         }
       },
 
-       hideAssoEvent(event)
+       hideAssoEvent(event, ok)
       {
+
         var assoService = Injector.resolve( [ "AssoService" ] )[0];
         var asso = event.asso;
         if (assoService.isHide(asso))
         {
-          assoService.showAsso(asso)
+          event.importance = 0;
+          assoService.showAsso(asso);
         }
         else 
         {
+          event.importance = -1;
          assoService.hideAsso(asso);
         }
 
-
-        console.log(assoService.isHide(asso));
-      },
-
-      isAssoHide(event)
-      {
-        var assoService = Injector.resolve( [ "AssoService" ] )[0];
-        return assoService.hideAsso(event.asso);
       }
-
 
     },
     template:
@@ -140,7 +136,7 @@ Vue.component('feed-event', {
           <div class="moreOptionMenu" style="display:none">
             <hr />
             <div class="followEvtOpt"  v-on:click="followEvent(event)" v-bind:class="classOptionsEvent(event,0)"></div>
-            <div class="HideEvtOpt" v-on:click="followEvent(event)" v-bind:class="classOptionsEvent(event,1)"></div>
+            <div class="HideEvtOpt" v-on:click="hideEvent(event)" v-bind:class="classOptionsEvent(event,1)"></div>
             <div class="HideEvtAssoOpt"  v-on:click="hideAssoEvent(event)" v-bind:class="classOptionsEvent(event,2)"></div>
             <div class="ShowDetEvt">Plus de détails</div>
             <div class="ContAsso">Contacter l'organsiateur</div>

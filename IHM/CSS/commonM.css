@@ -501,7 +501,7 @@ input {
 
 .optionUnhide:after
 {
-  content: "Ne masquer l'événement";
+  content: "Ne plus masquer l'événement";
 }
 
 .resgisteredEvt:after
