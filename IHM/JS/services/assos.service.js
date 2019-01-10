@@ -2,10 +2,15 @@
   let AssoService = function() {
 
     let assos = []
+    let hideAssos = new Set();
 
     return {
       get assos() {
         return assos
+      },
+
+      get hideAssos() {
+        return hideAssos
       },
 
       addAsso: function( asso ) {
@@ -14,6 +19,31 @@
         } else {
           console.warn( asso, "is not an Asso object" )
         }
+      },
+
+      hideAsso(assoName)
+      {
+        
+        if (!this.hideAssos.has(assoName))
+        {
+          this.hideAssos.add(assoName);
+        }
+       
+      },
+
+      showAsso(assoName)
+      {
+        
+        if ( this.hideAssos.has(assoName))
+        {
+           this.hideAssos.delete(assoName);
+        }
+       
+      },
+
+      isHide (assoName)
+      {
+        return  this.hideAssos.has(assoName);
       },
 
       createTestAssos: function() {

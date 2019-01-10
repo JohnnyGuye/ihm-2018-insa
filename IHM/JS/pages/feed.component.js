@@ -1,6 +1,7 @@
 Vue.component('feed', {
     data() {
-      return { events: Injector.resolve( "EventService" ).events }
+      console.log(Injector.resolve("AssoService"));
+      return { events: Injector.resolve( "EventService" ).events,  assoSrv: Injector.resolve("AssoService")}
     },
     template:
     `
@@ -12,8 +13,8 @@ Vue.component('feed', {
 
       <v-container fluid grid-list-lg style="padding: 0">
          <v-layout row wrap>
-             <v-flex xs12 v-for="evt in events" v-bind:key="evt.name">
-                <feed-event v-bind:event=evt></feed-event>
+             <v-flex xs12 v-for="evt in events" v-bind:class="{hideOption : assoSrv.isHide(evt.asso) || evt.importance<=0}" v-bind:key="evt.name">
+                <feed-event v-bind:event=evt  v-bind:assoSrv=assoSrv></feed-event>
              </v-flex>
          </v-layout>
       </v-container>
