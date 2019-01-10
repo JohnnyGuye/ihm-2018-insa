@@ -434,8 +434,8 @@ input {
   content: '.';
    color: transparent;
    display: inline-block;
-   height: 20px;
-   width: 20px;
+   height: 15px;
+   width: 15px;
    background-position: right top;
    background-size: 100%;
    margin-right: 5px;
@@ -443,31 +443,31 @@ input {
 
 .followEvtOpt:before
 {
-   background-image: url("../assets/calendar.png");
+   background-image: url("../assets/bell.png");
 }
 
 .HideEvtOpt:before
 {
 
-  background-image: url("../assets/calendar.png");
+  background-image: url("../assets/hide.png");
 }
 
 .HideEvtAssoOpt:before
 {
 
-  background-image: url("../assets/calendar.png");
+  background-image: url("../assets/hideAll.png");
 }
 
 .ShowDetEvt:before
 {
 
-  background-image: url("../assets/calendar.png");
+  background-image: url("../assets/info.png");
 }
 
 .ContAsso:before
 {
 
-  background-image: url("../assets/calendar.png");
+  background-image: url("../assets/contact.png");
 }
 .hideOption
 {
