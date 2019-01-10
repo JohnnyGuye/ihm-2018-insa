@@ -212,7 +212,7 @@ button.followable:active {
   letter-spacing: 0px;
 }
 button.followable:after {
-  content: "Suivre";
+  content: "S'abonner";
 }
 
 button.followable.unfollow{
@@ -237,7 +237,7 @@ button.followable.unfollow{
 }
 
 button.followable.unfollow:after {
-  content: "Ne plus suivre";
+  content: "Abonné";
 }
 
 
@@ -388,4 +388,132 @@ input {
   left: 20px;
   font-family: sans-serif;
   display: none;
+}
+
+.moreOption
+{
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+  top: 0;
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 16px;
+  vertical-align: middle;
+  border-radius: 50%;
+  background-color: rgba(200,200,200,0.1);
+    -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.moreOption:hover
+{
+  background-color: rgba(200,200,200,0.5);
+}
+
+.moreOptionMenu
+{
+  display: none;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.moreOptionMenu div
+{
+  text-align: justify;
+  cursor: pointer;
+}
+
+.moreOptionMenu div:before
+{
+  content: '.';
+   color: transparent;
+   display: inline-block;
+   height: 15px;
+   width: 15px;
+   background-position: right top;
+   background-size: 100%;
+   margin-right: 5px;
+}
+
+.followEvtOpt:before
+{
+   background-image: url("../assets/bell.png");
+}
+
+.HideEvtOpt:before
+{
+
+  background-image: url("../assets/hide.png");
+}
+
+.HideEvtAssoOpt:before
+{
+
+  background-image: url("../assets/hideAll.png");
+}
+
+.ShowDetEvt:before
+{
+
+  background-image: url("../assets/info.png");
+}
+
+.ContAsso:before
+{
+
+  background-image: url("../assets/contact.png");
+}
+.hideOption
+{
+  display: none;
+}
+
+ .optionFollow:after
+ {
+    content: "\0000A0 Suivre l'événement";
+    padding-right: 5px;
+ }
+
+ .optionUnfollow:after
+ {
+    content: "\0000A0 Evénement suivi";
+    padding-right: 5px;
+ }
+
+ .optionUnhideA:after
+ {
+  content: "\0000A0 Evénements de l'association masqués";
+  padding-right: 5px;
+ }
+
+.optionHideA:after
+{
+  content: "\0000A0 Masquer les événements de l'association";
+  padding-right: 5px;
+}
+
+.optionHide:after
+{
+  content: "\0000A0 Masquer l'événement";
+  padding-right: 5px;
+}
+
+.optionUnhide:after
+{
+  content: "\0000A0 Evénement masqué";
+  padding-right: 5px;
+}
+
+.resgisteredEvt:after
+{
+  content: "\0000A0 Vous êtes inscrit à cet événement";
+  padding-right: 5px;
+  background-color: rgb(228,38,24);
+  color: white;
 }
