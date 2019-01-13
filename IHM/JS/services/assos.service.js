@@ -21,6 +21,18 @@
         }
       },
 
+       getAsso: function (assoName)
+      {
+        var name = assoName.toLowerCase();
+        var  i = 0;
+        for (i; i<assos.length;i++)
+        {
+          var asso = assos[i];
+          if (asso.name == assoName)
+            return asso;
+        }
+      },
+
       hideAsso(assoName)
       {
         
