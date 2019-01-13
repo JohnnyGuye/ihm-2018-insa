@@ -802,7 +802,7 @@ Calendar.prototype.scrollToEnventsDay = function(numDay)
 
 		
 		var line = tbody.insertRow();
-		line.textContent = "+ Ajouter un événement";
+		line.textContent = "Aucun événement prévu";
 
 		var parent = document.getElementById("eventsList");
 	
