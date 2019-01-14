@@ -75,7 +75,7 @@
         event.place = "MdE"
         event.importance = 2
         event.date = date
-        event.asso = "Anim'"
+        event.asso = "BDE"
         event.imageURI = "./assets/marche-noel.jpg"
 
         this.addEvent( event );

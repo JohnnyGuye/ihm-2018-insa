@@ -8,7 +8,7 @@ Vue.component('feed', {
     <base-layout>
 
       <div slot="header">
-        News feed
+        <searchbar></searchbar>
       </div>
 
       <v-container fluid grid-list-lg style="padding: 0">
